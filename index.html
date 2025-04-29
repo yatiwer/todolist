@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>کوئرا لیست</title>
+  <link rel="stylesheet" href="src/output.css" />
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>کوئرا لیست</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="#" class="active">خانه</a></li>
+          <li><a href="#">تسک‌ها</a></li>
+          <li><a href="#">تقویم</a></li>
+          <li><a href="#">گزارشات</a></li>
+          <li><a href="#">تنظیمات</a></li>
+          <li><a href="#">پشتیبانی</a></li>
+          <li><a href="#">پروفایل</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="theme-toggle">
+          <button id="toggle-theme">تاریک</button>
+          <button id="toggle-theme">روشن</button>
+        </div>
+        <button class="logout-btn">خروج</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <div class="user-info">
+          <h1>سلام، رویا</h1>
+          <p>امروز سه‌شنبه، ۵ بهمن ۱۴۰۳</p>
+        </div>
+        <div class="user-avatar">
+          <img src="" alt="User Avatar"/>
+        </div>
+      </header>
+
+      <!-- Today's Tasks -->
+      <section class="tasks-today">
+        <div class="section-header">
+          <h2>تسک‌های امروز</h2>
+          <button class="add-task-btn">افزودن وظیفه جدید</button>
+        </div>
+
+        <div class="task-list">
+          <div class="task-card high-priority">
+            <div class="task-info">
+              <p class="task-title">جلسه با مدیر پروژه</p>
+              <p class="task-desc">جلسه با محسن یگانه و مریم جلالی</p>
+            </div>
+            <span class="task-tag">بالا</span>
+          </div>
+
+          <div class="task-card medium-priority">
+            <div class="task-info">
+              <p class="task-title">خرید میوه و سبزیجات برای خانه</p>
+              <p class="task-desc">سوپرمارکت یاران دریایی</p>
+            </div>
+            <span class="task-tag">متوسط</span>
+          </div>
+
+          <div class="task-card low-priority">
+            <div class="task-info">
+              <p class="task-title">تماس با جمشید</p>
+              <p class="task-desc">باید در مورد کارهای باقیمانده از پروژه قبلی صحبت کنیم</p>
+            </div>
+            <span class="task-tag">پایین</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Completed Tasks -->
+      <section class="tasks-completed">
+        <h2>تسک‌های انجام شده</h2>
+        <p>۳ تسک را باید انجام دهید</p>
+        <ul class="completed-list">
+          <li class="completed-task">
+            <span>خرید میوه و سبزیجات و لبنیات برای خانه</span>
+            <input type="checkbox" checked />
+          </li>
+          <li class="completed-task">
+            <span>تماس با مبل فروش در مورد تاخیر در ارسال</span>
+            <input type="checkbox" checked />
+          </li>
+          <li class="completed-task">
+            <span>جلسه مصاحبه با مرتضی در مورد مصاحبه با کار آموز ادمین پنل</span>
+            <input type="checkbox" checked />
+          </li>
+        </ul>
+      </section>
+    </main>
+
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
