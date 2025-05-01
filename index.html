@@ -49,7 +49,7 @@
       </header>
 
       <!-- Today's Tasks -->
-      <section class="tasks-today container mx-auto p-4 rounded-lg shadow text-right max-w-md md:w-[1440px]">
+      <section class="container mx-auto p-4 rounded-lg shadow text-right max-w-md md:w-[1440px]">
         <div class="section-header">
           <h2 class="text-xl font-bold text-gray-800 mb-1">تسک‌های امروز</h2>
           <p class="text-sm text-gray-500 mb-4">۳ تسک را باید انجام دهید</p>
@@ -58,8 +58,8 @@
             <button class="add-task-btn text-blue-500">افزودن وظیفه جدید</button>
           </div>
         </div>
-        <ul class="task-list space-y-3 md:space-y-4">
-          <li class="task-card high-priority relative bg-white shadow rounded-md p-3 pr-4">
+        <ul class="space-y-3 gap-1 md:space-y-4">
+          <li class="relative bg-white shadow rounded-md p-3 pr-4">
             <div class="absolute top-0 bottom-0 right-0 w-1 bg-red-400 rounded-l-md"></div>
             <div class="flex justify-between">
               <div class=" flex items-center gap-3">
@@ -69,9 +69,9 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
                 <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" clip-rule="evenodd" />
             </div>
-            <span class="task-tag text-xs p-4 text-red-400 bg-red-200">بالا</span>
+            <span class="inline-block text-xs p-4 text-red-400 bg-red-200">بالا</span>
           </li>
-          <li class="task-card high-priority relative bg-white shadow rounded-md p-3 pr-4">
+          <li class="relative bg-white shadow rounded-md p-3 pr-4">
             <div class="absolute top-0 bottom-0 right-0 w-1  bg-amber-400 rounded-l-md"></div>
             <div class="flex justify-between">
               <div class=" flex items-center gap-3">
@@ -81,21 +81,21 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
                 <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" clip-rule="evenodd" />
             </div>
-            <span class="task-tag text-xs p-4 text-amber-400 bg-amber-200">متوسط</span>
+            <span class="inline-block text-xs p-4 text-amber-400 bg-amber-200">متوسط</span>
             <p class="task-desc p-4">سوپرمارکت یاران دریایی</p>
           </li>
-          <li class="task-card high-priority relative bg-white shadow rounded-md p-3 pr-4">
+          <li class="relative bg-white shadow rounded-md p-3 pr-4">
             <div class="absolute top-0 bottom-0 right-0 w-1  bg-emerald-500 rounded-l-md"></div>
             <div class="flex justify-between">
               <div class=" flex items-center gap-3">
                 <input type="checkbox" class="w-3 h-3 text-blue-500 form-checkbox" />
-                <span class="task-title text-sm text-gray-800">تماس با جمشید</span>
+                <span class="text-sm text-gray-800">تماس با جمشید</span>
               </div>
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
                 <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" clip-rule="evenodd" />
             </div>
-            <span class="task-tag text-xs p-4 text-emerald-500 bg-emerald-300">پایین</span>
-            <p class="task-desc p-4">باید در مورد کارهای باقیمانده از پروژه قبلی صحبت کنیم</p>
+            <span class="inline-block text-xs p-4 text-emerald-500 bg-emerald-300">پایین</span>
+            <p class="p-4">باید در مورد کارهای باقیمانده از پروژه قبلی صحبت کنیم</p>
           </li>
         </ul>
       </section>
