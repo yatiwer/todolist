@@ -12,27 +12,32 @@
   <div class="app-container">
 
     <!-- Sidebar -->
-    <aside class="sidebar hidden">
-      <div class="sidebar-header">
-        <h2>کوئرا لیست</h2>
-      </div>
-      <nav class="sidebar-nav hidden">
-        <ul>
-          <li><a href="#" class="active">خانه</a></li>
-          <li><a href="#">تسک‌ها</a></li>
-          <li><a href="#">تقویم</a></li>
-          <li><a href="#">گزارشات</a></li>
-          <li><a href="#">تنظیمات</a></li>
-          <li><a href="#">پشتیبانی</a></li>
-          <li><a href="#">پروفایل</a></li>
-        </ul>
-      </nav>
-      <div class="sidebar-footer">
-        <div class="theme-toggle">
-          <button id="toggle-theme">تاریک</button>
-          <button id="toggle-theme">روشن</button>
+    <aside class="sidebar border w-2xs h-full p-4 sm:hidden">
+      <div class="border-amber-700">
+        <div class="sidebar-header flex flex-row justify-between p-3 mb-9">
+          <h2>کوئرا لیست</h2>
+          <img class="w-6" src="./assets/images/close-circle.png" alt="close-circle">
         </div>
-        <button class="logout-btn">خروج</button>
+        <nav class="sidebar-nav flex flex-col gap-24">
+          <ul class="">
+            <li class="flex flex-row gap-3 p-4" style="background-color: #F5FAFF;"><img src="./assets/images/home-2.png" alt="home" class="w-6"><a class="font-bold" style="color: #007BFF;" href="#" class="active">خانه</a></li>
+            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/task-square.png" alt="task-square" class="w-6"><a style="color: #525252;" href="#">تسک‌ها</a></li>
+            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/calendar.png" alt="calendar" class="w-6"><a style="color: #525252;" href="#">تقویم</a></li>
+            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/arrange-square-2.png" alt="arrange-square" class="w-6"><a style="color: #525252;" href="#">گزارشات</a></li>
+            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/setting.png" alt="setting" class="w-6"><a style="color: #525252;" href="#">تنظیمات</a></li>
+            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/24-support.png" alt="24-support" class="w-6"><a style="color: #525252;" href="#">پشتیبانی</a></li>
+            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/profile.png" alt="profile" class="w-6"><a style="color: #525252;" href="#">پروفایل</a></li>
+          </ul>
+        </nav>
+      <div class="sidebar-footer">
+        <div class="theme-toggle flex flex-row">
+          <button id="toggle-theme flex flex-row">
+            <img class="w-4" src="./assets/images/moon.png" alt="dark_mode">تاریک</button>
+          <button id="toggle-theme flex flex-row">
+            <img class="w-4" src="./assets/images/sun.png" alt="light_mode">روشن</button>
+        </div>
+        <button class="logout-btn"><img class="w-4" src="./assets/images/logout.png" alt="logout">خروج</button>
+      </div>
       </div>
     </aside>
 
