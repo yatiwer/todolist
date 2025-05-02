@@ -12,11 +12,11 @@
   <div class="app-container">
 
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar hidden">
       <div class="sidebar-header">
         <h2>کوئرا لیست</h2>
       </div>
-      <nav class="sidebar-nav">
+      <nav class="sidebar-nav hidden">
         <ul>
           <li><a href="#" class="active">خانه</a></li>
           <li><a href="#">تسک‌ها</a></li>
@@ -39,18 +39,51 @@
     <!-- Main Content -->
     <main class="main-content">
       <!-- Header -->
-      <header class="header">
-        <div class="user-info">
-          <h1>سلام، رویا</h1>
-          <p>امروز سه‌شنبه، ۵ بهمن ۱۴۰۳</p>
-        </div>
-        <div class="user-avatar">
-          <img src="" alt="User Avatar"/>
-        </div>
+      <header class="header  mx-auto p-4  text-right max-w-md md:w-[1440px] border-gray-300 bg-slate-50">
+        <nav class="flex items-center gap-2 rounded-lg p-3 bg-white shadow-md  ">
+
+          <div class="logo-menu flex items-center">
+            <img src="./assets/images/BergurMenu.png" alt="">
+          </div>
+          <div class="title flex items-center justify-center mb-4 w-full">
+            <h1 class="text-xl font-semibold text-gray-800">کوئرا لیست</h1>
+          </div>
+          <!-- <div class="menu items-center justify-between md:hidden">
+
+          <ul class="">
+            <li><a href="#" class="active">خانه</a></li>
+            <li><a href="#">تسک‌ها</a></li>
+            <li><a href="#">تقویم</a></li>
+            <li><a href="#">گزارشات</a></li>
+            <li><a href="#">تنظیمات</a></li>
+            <li><a href="#">پشتیبانی</a></li>
+            <li><a href="#">پروفایل</a></li>
+          </ul>
+        </div> -->
+        </nav>
+
+       
+
       </header>
+    
 
       <!-- Today's Tasks -->
       <section class="container mx-auto p-4 rounded-lg shadow text-right max-w-md md:w-[1440px]">
+
+        <div class="hello-today flex items-center justify-start ">
+          <div class="flex flex-row gap-2 items-center max-w-md md:w-[1440px]">
+          <div class="user-avatar">
+            <img src="./assets/images/royaPic.png" alt="User Avatar"/>
+          </div>
+          <div class="user-info">
+            <h1 class="font-semibold">سلام، رویا</h1>
+            <p class="text-gray-500">امروز سه‌شنبه، ۵ بهمن ۱۴۰۳</p>
+          </div>
+        </div>
+      </div>
+    
+
+
         <div class="section-header p-3">
           <h2 class="text-xl font-bold text-gray-800 mb-1">تسک‌های امروز</h2>
           <p class="text-sm text-gray-500 mb-4">۳ تسک را باید انجام دهید</p>
