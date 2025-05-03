@@ -227,6 +227,9 @@
   .z-40 {
     z-index: 40;
   }
+  .z-50 {
+    z-index: 50;
+  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -245,8 +248,20 @@
       max-width: 96rem;
     }
   }
+  .m-1 {
+    margin: calc(var(--spacing) * 1);
+  }
+  .m-2 {
+    margin: calc(var(--spacing) * 2);
+  }
   .mx-auto {
     margin-inline: auto;
+  }
+  .my-5 {
+    margin-block: calc(var(--spacing) * 5);
+  }
+  .my-8 {
+    margin-block: calc(var(--spacing) * 8);
   }
   .mt-3 {
     margin-top: calc(var(--spacing) * 3);
@@ -275,6 +290,9 @@
   .inline-block {
     display: inline-block;
   }
+  .table {
+    display: table;
+  }
   .h-3 {
     height: calc(var(--spacing) * 3);
   }
@@ -298,6 +316,12 @@
   }
   .max-w-md {
     max-width: var(--container-md);
+  }
+  .border-collapse {
+    border-collapse: collapse;
+  }
+  .resize {
+    resize: both;
   }
   .flex-col {
     flex-direction: column;
@@ -401,6 +425,9 @@
   .bg-gray-100 {
     background-color: var(--color-gray-100);
   }
+  .bg-gray-400 {
+    background-color: var(--color-gray-400);
+  }
   .bg-red-100 {
     background-color: var(--color-red-100);
   }
@@ -421,6 +448,9 @@
   }
   .px-3 {
     padding-inline: calc(var(--spacing) * 3);
+  }
+  .py-0 {
+    padding-block: calc(var(--spacing) * 0);
   }
   .py-0\.5 {
     padding-block: calc(var(--spacing) * 0.5);
@@ -493,11 +523,20 @@
   .text-red-600 {
     color: var(--color-red-600);
   }
+  .text-slate-600 {
+    color: var(--color-slate-600);
+  }
   .text-white {
     color: var(--color-white);
   }
   .line-through {
     text-decoration-line: line-through;
+  }
+  .underline {
+    text-decoration-line: underline;
+  }
+  .opacity-50 {
+    opacity: 50%;
   }
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
@@ -506,6 +545,10 @@
   .shadow-md {
     --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
   }
   .hover\:cursor-pointer {
     &:hover {
@@ -740,6 +783,11 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -760,6 +808,7 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-outline-style: solid;
     }
   }
 }
