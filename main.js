@@ -10,6 +10,8 @@ toggleTheme.addEventListener("click", () => {
 
 const addTaskbutton = document.querySelector('.add-task-btn');
 const form = document.querySelector('.task-From');
+console.log(addTaskbutton);
+console.log(form);
 addTaskbutton.addEventListener("click",()=>{
   if(form.classList.contains('hidden')){
     form.classList.remove("hidden");
