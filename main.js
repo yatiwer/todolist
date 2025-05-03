@@ -1,19 +1,19 @@
 const BergurMenu = document.getElementById("BergurMenu");
 const navMenu = document.getElementById("navMenu");
 const closeMenu = document.getElementById("closeMenu");
-const overlay = document.getElementById("overlay");
-const body = document.body;
+//const overlay = document.getElementById("overlay");
+//const body = document.body;
 
 BergurMenu.addEventListener("click", () => {
     navMenu.classList.toggle("hidden");
-    overlay.classList.toggle("hidden");
-    body.classList.toggle("overflow-hidden");
+    //overlay.classList.toggle("hidden");
+   // body.classList.toggle("overflow-hidden");
 });
 
 
 
 
-/*const toggleTheme = document.getElementById("toggle-theme");
+const toggleTheme = document.getElementById("toggle-theme");
 
 toggleTheme.addEventListener("click", () => {
   if (document.documentElement.classList.contains("dark")) {
@@ -30,4 +30,4 @@ addTaskbutton.addEventListener("click",()=>{
     form.classList.remove("hidden");
   }
 })
-*/
+
