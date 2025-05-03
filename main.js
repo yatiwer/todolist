@@ -3,6 +3,7 @@ const navMenu = document.getElementById("navMenu");
 const closeMenu = document.getElementById("closeMenu");
 const overlay = document.getElementById("overlay");
 const body = document.body;
+
 BergurMenu.addEventListener("click", () => {
     navMenu.classList.toggle("hidden");
     overlay.classList.toggle("hidden");
