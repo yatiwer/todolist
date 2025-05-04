@@ -22,7 +22,7 @@ toggleTheme.addEventListener("click", () => {
   }
 });
 
-
+//////////Display the form and create a new task based on the selected priority
 
 const addTaskbutton = document.querySelector('.add-task-btn');
 const form = document.querySelector('.task-From');
@@ -34,7 +34,6 @@ addTaskbutton.addEventListener("click",()=>{
   }
 })
 
-//////////Display the form and create a new task based on the selected priority
 
 const addTagbutton = document.querySelector('.add-tag-btn');
 const priorityTag = document.querySelector('.tag-Form');
@@ -91,7 +90,9 @@ form.addEventListener("submit", (e) => {
   const id=Math.random()*1000;
   const NewTask = new task(id,taskTitle.value,taskDesc.value,selectedPriority);
   taskmanager.AddTask(NewTask);
+  console.log(taskmanager);
 });
+
 
 
 ////////////////////
