@@ -23,6 +23,8 @@ toggleTheme.addEventListener("click", () => {
   }
 });
 
+
+
 const addTaskbutton = document.querySelector('.add-task-btn');
 const form = document.querySelector('.task-From');
 console.log(addTaskbutton);
@@ -33,3 +35,64 @@ addTaskbutton.addEventListener("click",()=>{
   }
 })
 
+//////////Display the form and create a new task based on the selected priority
+
+const addTagbutton = document.querySelector('.add-tag-btn');
+const priorityTag = document.querySelector('.tag-Form');
+addTagbutton.addEventListener("click",()=>{
+  if(priorityTag.classList.contains('hidden')){
+    priorityTag.classList.remove("hidden");
+    priorityTag.style.display = 'inline-block';
+  }
+})
+
+let selectedPriority= null;
+const priorityValue = document.querySelectorAll('.priority-btn');
+priorityValue.forEach(button =>{
+  button.addEventListener("click",()=>{
+    if(button.classList.contains('low')){
+      selectedPriority = 3;
+    }else if(button.classList.contains('medium')){
+      selectedPriority = 2;
+    }else if(button.classList.contains('high')){
+      selectedPriority = 1;  
+    }
+  })
+})
+
+class task {
+  constructor(id,title,description,priority){
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.priority = priority;
+    this.isCompleted = false;
+  }
+  taskDone(){
+    this.isCompleted = !this.isCompleted;
+  }
+}
+
+
+class taskManager{
+  constructor(){
+    this.tasks = []; 
+  }
+  AddTask(newTask){
+    this.tasks.push(newTask); 
+  }
+}
+
+
+const taskmanager = new taskManager();
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const taskTitle = document.getElementById('title')
+  const taskDesc = document.getElementById('description')
+  const id=Math.random()*1000;
+  const NewTask = new task(id,taskTitle.value,taskDesc.value,selectedPriority);
+  taskmanager.AddTask(NewTask);
+});
+
+
+////////////////////
