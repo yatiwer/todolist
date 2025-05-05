@@ -32,7 +32,7 @@ addTaskbutton.addEventListener("click", () => {
     form.classList.remove("hidden");
   }
 });
-
+// ???????
 
 const addTagbutton = document.querySelector(".add-tag-btn");
 const priorityTag = document.querySelector(".tag-Form");
@@ -266,6 +266,8 @@ document.addEventListener("change", function(e) {
       // تیک خورد → تکسک انجام شده
       completedList.appendChild(taskItem);
       titleSpan.classList.add("line-through");
+      
+
     } else {
       // تیک برداشته شد → برمی‌گرده تو تسک‌های امروز
       todaysList.appendChild(taskItem);
