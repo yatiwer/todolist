@@ -183,3 +183,68 @@ document.addEventListener("change", function (e) {
   }
 });
 // این تابع برای شمارش تعداد تسک‌های باقی‌مانده استفاده می‌شود
+
+
+document.addEventListener("change", function(e) {
+  if (e.target.classList.contains("form-checkbox")) {
+    const taskItem      = e.target.closest("li");
+    const titleSpan     = taskItem.querySelector(".task-title");
+    const todaysList    = document.querySelector(".todays-tasks");
+    const completedList = document.querySelector(".completed-tasks");
+
+    if (e.target.checked) {
+      // تیک خورد → تکسک انجام شده
+      completedList.appendChild(taskItem);
+      titleSpan.classList.add("line-through");
+    } else {
+      // تیک برداشته شد → برمی‌گرده تو تسک‌های امروز
+      todaysList.appendChild(taskItem);
+      titleSpan.classList.remove("line-through");
+    }
+
+    countRemainingTasks();
+  }
+});
+
+document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
+  trigger.addEventListener('click', function(e) {
+    e.stopPropagation();
+
+    const taskItem = this.closest('li');
+    const existingMenu = taskItem.querySelector('.edit-delete-menu');
+    if (existingMenu) {
+      existingMenu.remove();
+      return;
+    }
+
+    const menu = document.createElement('div');
+    
+    menu.className = 'edit-delete-menu absolute top-0 right-full mr-2 bg-white shadow rounded p-2 flex flex-col gap-2';
+    menu.innerHTML = `
+      <button class="edit-btn flex items-center gap-1 hover:text-blue-600 cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.5-9.5z" />
+        </svg>
+        
+      </button>
+      <button class="delete-btn flex items-center gap-1 hover:text-red-600 cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        
+      </button>
+    `;
+    taskItem.append(menu);
+
+    document.addEventListener('click', function closeMenu(ev) {
+      if (!menu.contains(ev.target) && ev.target !== trigger) {
+        menu.remove();
+        document.removeEventListener('click', closeMenu);
+      }
+    });
+  });
+});
+
+
