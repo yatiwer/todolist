@@ -184,6 +184,7 @@ document.addEventListener("change", function (e) {
 });
 // این تابع برای شمارش تعداد تسک‌های باقی‌مانده استفاده می‌شود
 
+
 document.addEventListener("change", function(e) {
   if (e.target.classList.contains("form-checkbox")) {
     const taskItem      = e.target.closest("li");
@@ -245,3 +246,5 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
     });
   });
 });
+
+
