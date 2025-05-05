@@ -24,10 +24,6 @@ toggleTheme.addEventListener("click", () => {
 
 const addTaskbutton = document.querySelector('.add-task-btn');
 const form = document.querySelector('.task-From');
-
-const addTaskbutton = document.querySelector(".add-task-btn");
-const form = document.querySelector(".task-From");
-
 console.log(addTaskbutton);
 console.log(form);
 addTaskbutton.addEventListener("click", () => {
@@ -37,7 +33,7 @@ addTaskbutton.addEventListener("click", () => {
 });
 
 
-const addTagbutton = document.querySelector(".add-task-btn");
+const addTagbutton = document.querySelector(".add-tag-btn");
 const priorityTag = document.querySelector(".tag-Form");
 addTagbutton.addEventListener("click", () => {
   if (priorityTag.classList.contains("hidden")) {
@@ -46,7 +42,7 @@ addTagbutton.addEventListener("click", () => {
   }
 });
 
-let selectedPriority= null;
+let selectedPriority= 3;
 const priorityValue = document.querySelectorAll('.priority-btn');
 priorityValue.forEach(button =>{
   button.addEventListener("click",()=>{
