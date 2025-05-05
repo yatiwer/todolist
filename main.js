@@ -25,8 +25,6 @@ toggleTheme.addEventListener("click", () => {
 const addTaskbutton = document.querySelector('.add-task-btn');
 const form = document.querySelector('.task-From');
 
-const addTaskbutton = document.querySelector(".add-task-btn");
-const form = document.querySelector(".task-From");
 
 console.log(addTaskbutton);
 console.log(form);
@@ -44,6 +42,7 @@ addTagbutton.addEventListener("click", () => {
     priorityTag.classList.remove("hidden");
     priorityTag.style.display = "inline-block";
   }
+
 });
 
 let selectedPriority = null;
@@ -57,6 +56,8 @@ priorityValue.forEach((button) => {
     } else if (button.classList.contains("high")) {
       selectedPriority = 1;
     }
+    
+    
   });
 });
 
@@ -76,12 +77,75 @@ class task {
 class taskManager {
   constructor() {
     this.tasks = [];
+    this.listContainer = document.getElementById("list-container")
+    this.loadTasksFromStorage();
+    
   }
   AddTask(newTask) {
     this.tasks.push(newTask);
+    this.saveTasksToStorage();
+    this.renderTask();
+    
   }
+  saveTasksToStorage() {
+    localStorage.setItem("tasks", JSON.stringify(this.tasks));
+  }
+  loadTasksFromStorage() {
+    const data = localStorage.getItem("tasks");
+    if (data) {
+      this.tasks = JSON.parse(data);
+    }
+    this.renderTask();
+    
+  }
+  sortTask(){
+    this.tasks.sort((a , b) => a.priority - b.priority) ; 
+  }
+  renderTask(){
+    this.sortTask() ;
+    this.listContainer.innerHTML = "" ;
+    
+    
+    this.tasks.forEach(item => {
+      let priorityColor = "bg-red-400";
+      let tagColor = "bg-red-100 text-red-600";
+      let tagText = "بالا";
+  
+      if (item.priority === 2) {
+        priorityColor = "bg-yellow-400";
+        tagColor = "bg-yellow-100 text-yellow-600";
+        tagText = "متوسط";
+      } else if (item.priority === 3) {
+        priorityColor = "bg-green-400";
+        tagColor = "bg-green-200 text-green-600";
+        tagText = "پایین";
+      }
+      const li = document.createElement("li") ; 
+      li.className = "relative bg-white shadow rounded-xl p-3 pr-4 md:h-28  " ;
+      li.innerHTML = `
+        <div class="absolute top-0 bottom-0 right-0 w-1 ${priorityColor} rounded-r-full"></div>
+            <div class="flex justify-between">
+              <div class=" flex items-center gap-3 mb-2">
+                <input type="checkbox" class="w-3 h-3 text-blue-500 form-checkbox" />
+                <span class="task-title text-sm">${item.title}</span>
+                <span class="hidden md:inline-block text-xs px-3 py-0.5 rounded-md  ${tagColor} mr-4   ">${tagText}</span>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor" id="EditDeleteMenu">
+                <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" clip-rule="evenodd" />
+            </div>
+            
+             <span class="inline-block text-xs px-3 py-0.5 rounded-md  ${tagColor} mr-4 md:hidden  ">${tagText}</span>
+            
+            
+             <p class="task-desc text-sm text-gray-500 mb-4 p-4 ">${item.description}</p>
+      `;
+        
+      this.listContainer.appendChild(li)
+    })
+  }
+  
 }
-
+  
 const taskmanager = new taskManager();
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -96,6 +160,9 @@ form.addEventListener("submit", (e) => {
   );
   taskmanager.AddTask(NewTask);
   console.log(taskmanager);
+  taskTitle.value = "" ; 
+  taskDesc.value = "" ; 
+  selectedPriority = null ; 
 });
 
 
