@@ -44,7 +44,7 @@ addTagbutton.addEventListener("click",()=>{
   }
 })
 
-let selectedPriority= null;
+let selectedPriority= 3;
 const priorityValue = document.querySelectorAll('.priority-btn');
 priorityValue.forEach(button =>{
   button.addEventListener("click",()=>{
