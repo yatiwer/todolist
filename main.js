@@ -122,22 +122,24 @@ class taskManager {
       const li = document.createElement("li") ; 
       li.className = "relative bg-white shadow rounded-xl p-3 pr-4 md:h-28  " ;
       li.innerHTML = `
-        <div class="absolute top-0 bottom-0 right-0 w-1 ${priorityColor} rounded-r-full"></div>
-            <div class="flex justify-between">
-              <div class=" flex items-center gap-3 mb-2">
-                <input type="checkbox" class="w-3 h-3 text-blue-500 form-checkbox" />
-                <span class="task-title text-sm">${item.title}</span>
-                <span class="hidden md:inline-block text-xs px-3 py-0.5 rounded-md  ${tagColor} mr-4   ">${tagText}</span>
-              </div>
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor" id="EditDeleteMenu">
-                <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" clip-rule="evenodd" />
-            </div>
-            
-             <span class="inline-block text-xs px-3 py-0.5 rounded-md  ${tagColor} mr-4 md:hidden  ">${tagText}</span>
-            
-            
-             <p class="task-desc text-sm text-gray-500 mb-4 p-4 ">${item.description}</p>
-      `;
+      <div class="absolute top-0 bottom-0 right-0 w-1 ${priorityColor} rounded-r-full"></div>
+      <div class="flex justify-between items-start">
+        <div class="flex items-center gap-3 mb-2">
+          <input type="checkbox" class="w-3 h-3 text-blue-500 form-checkbox" />
+          <span class="task-title text-sm">${item.title}</span>
+          <span class="hidden md:inline-block text-xs px-3 py-0.5 rounded-md ${tagColor} mr-4">${tagText}</span>
+        </div>
+        <!-- اینجا آیکون سه‌نقطه -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="w-5 h-5 text-gray-400 edit-delete-trigger cursor-pointer"
+             viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 6a2 2 0 110-4 2 2 0 010 4zm0 6a2 2 0 110-4 2 2 0 010 4zm0 6a2 2 0 110-4 2 2 0 010 4z" />
+        </svg>
+      </div>
+      <span class="inline-block md:hidden text-xs px-3 py-0.5 rounded-md ${tagColor} mr-4">${tagText}</span>
+      <p class="task-desc text-sm text-gray-500 mb-4 p-4">${item.description}</p>
+    `;
+    
         
       this.listContainer.appendChild(li)
     })
@@ -293,14 +295,14 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
     
     menu.className = 'edit-delete-menu absolute top-0 right-full mr-2 bg-white shadow rounded p-2 flex flex-col gap-2';
     menu.innerHTML = `
-      <button class="edit-btn flex items-center gap-1 hover:text-blue-600 cursor-pointer">
+      <button class="edit-btn flex items-center gap-1 hover:text-blue-600 cursor-pointer edit-delete-trigger">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.5-9.5z" />
         </svg>
         
       </button>
-      <button class="delete-btn flex items-center gap-1 hover:text-red-600 cursor-pointer">
+      <button class="delete-btn flex items-center gap-1 hover:text-red-600 cursor-pointer edit-delete-trigger">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M6 18L18 6M6 6l12 12" />
@@ -318,5 +320,3 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
     });
   });
 });
-
-
