@@ -67,7 +67,33 @@ priorityValue.forEach(button =>{
     }
   });
 });
-
+const priorityOptions = document.getElementById('priority-options'); 
+const Priority = document.getElementById('selected-priority'); 
+const priorityLabel = document.getElementById('priority-label'); 
+const removePriority = document.getElementById('remove-priority'); 
+priorityValue.forEach(btn => { 
+    btn.addEventListener('click', () => { 
+        const value = btn.textContent.trim();
+         priorityOptions.classList.add('hidden'); 
+         Priority.classList.remove('hidden'); 
+         priorityLabel.textContent = value; 
+         Priority.classList.remove( 'bg-emerald-200', 'text-emerald-700', 'bg-amber-200', 'text-amber-600', 'bg-red-100', 'text-red-600' );
+         priorityTag.classList.remove( 'bg-white', 'border' ,'border-gray-200','shadow-2xl', 'rounded-md');
+         if (value === 'پایین') { 
+            Priority.classList.add('bg-emerald-200', 'text-emerald-700');
+        } else if (value === 'متوسط') { 
+            Priority.classList.add('bg-amber-200', 'text-amber-600'); 
+        } else if (value === 'بالا') { 
+            Priority.classList.add('bg-red-100', 'text-red-600');
+        } 
+    }); 
+}); 
+removePriority.addEventListener('click', () => { 
+    Priority.classList.add('hidden'); 
+    priorityOptions.classList.remove('hidden'); 
+    priorityLabel.textContent = '';
+    priorityTag.classList.add( 'bg-white', 'border' ,'border-gray-200','shadow');
+ });
 const inputTitle =document.getElementById("title"); 
 const submitButton = document.getElementById("submitButton"); 
 inputTitle.addEventListener("input", () => { 
@@ -197,7 +223,7 @@ class taskManager {
   
 const taskmanager = new taskManager();
 form.addEventListener("submit", (e) => {
-  e.preventDefault();
+  //e.preventDefault();
   const taskTitle = document.getElementById("title");
   const taskDesc = document.getElementById("description");
   const id = Math.random() * 1000;
