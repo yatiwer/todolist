@@ -29,15 +29,16 @@ const form = document.querySelector('.task-From');
 
 console.log(addTaskbutton);
 console.log(form);
+
+
 addTaskbutton.addEventListener("click", () => {
      
   if (form.classList.contains("hidden")) {
     form.classList.remove("hidden");
 
   }
-    
-  });
-    
+  
+ })
 
 
 
@@ -64,9 +65,26 @@ priorityValue.forEach(button =>{
     } else if (button.classList.contains("high")) {
       selectedPriority = 1;
     }
-    
-    
   });
+});
+
+const inputTitle =document.getElementById("title"); 
+const submitButton = document.getElementById("submitButton"); 
+inputTitle.addEventListener("input", () => { 
+  if (inputTitle.value.trim() !== "") { 
+    submitButton.disabled = false; 
+    submitButton.classList.remove("bg-blue-400", "hover:cursor-not-allowed"); 
+    submitButton.classList.add("bg-blue-600", "hover:cursor-pointer"); 
+  } else { 
+    submitButton.disabled = true; 
+    submitButton.classList.remove("bg-blue-600", "hover:cursor-pointer"); 
+    submitButton.classList.add("bg-blue-400", "hover:cursor-not-allowed"); 
+  }
+});
+
+const closeButton = document.getElementById("closeButton"); 
+closeButton.addEventListener("click", () => { 
+  form.classList.add("hidden"); 
 });
 
 class task {
@@ -104,6 +122,7 @@ class taskManager {
     if (data) {
       this.tasks = JSON.parse(data);
     }
+    
     this.renderTask();
     
     
@@ -155,6 +174,9 @@ class taskManager {
       this.listContainer.appendChild(li)
     })
     if(this.tasks.length===0){
+      document.getElementById("remaining-count").classList.add("hidden");
+      document.getElementById("no-task").classList.remove("hidden");
+
       const container = document.querySelector(".container") ; 
       const div = document.createElement("div")
       div.className = "empty-list flex flex-col" ;
@@ -190,6 +212,9 @@ form.addEventListener("submit", (e) => {
   taskTitle.value = "" ; 
   taskDesc.value = "" ; 
   selectedPriority = null ; 
+  submitButton.disabled = true; 
+  submitButton.classList.remove("bg-blue-600", "hover:cursor-pointer"); 
+  submitButton.classList.add("bg-blue-400", "hover:cursor-not-allowed"); 
 });
 
 
