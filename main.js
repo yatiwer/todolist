@@ -26,15 +26,35 @@ toggleTheme.addEventListener("click", () => {
 
 const addTaskbutton = document.querySelector('.add-task-btn');
 const form = document.querySelector('.task-From');
+
 const emptyList=document.querySelector(".empty-list") ; 
 addTaskbutton.addEventListener("click", () => { 
  if (form.classList.contains("hidden")) {
     form.classList.remove("hidden");
   }
 });
+
+
+console.log(addTaskbutton);
+console.log(form);
+
+
+addTaskbutton.addEventListener("click", () => {
+     
+  if (form.classList.contains("hidden")) {
+    form.classList.remove("hidden");
+
+  }
+  
+ })
+
+
+
+
 const addTagbutton = document.querySelector(".add-tag-btn");
 const priorityTag = document.querySelector(".tag-Form");
 addTagbutton.addEventListener("click", () => {
+  
   if (priorityTag.classList.contains("hidden")) {
     priorityTag.classList.remove("hidden");
     priorityTag.style.display = "inline-block";
@@ -172,8 +192,8 @@ class taskManager {
         </div>
         
         <svg xmlns="http://www.w3.org/2000/svg"
-             class="w-5 h-5 text-gray-400 edit-delete-trigger cursor-pointer"
-             viewBox="0 0 20 20" fill="currentColor">
+            class="w-5 h-5 text-gray-400 edit-delete-trigger cursor-pointer"
+            viewBox="0 0 20 20" fill="currentColor">
           <path d="M10 6a2 2 0 110-4 2 2 0 010 4zm0 6a2 2 0 110-4 2 2 0 010 4zm0 6a2 2 0 110-4 2 2 0 010 4z" />
         </svg>
       </div>
@@ -185,17 +205,22 @@ class taskManager {
       this.listContainer.appendChild(li)
     })
     if(this.tasks.length===0){
+      document.getElementById("remaining-count").classList.add("hidden");
+      document.getElementById("no-task").classList.remove("hidden");
+
       const container = document.querySelector(".container") ; 
       const div = document.createElement("div")
       div.className = "empty-list flex flex-col" ;
       div.innerHTML = `
-         <img src="./assets/images/2143202_Artboard 1.png" alt="image" class="h-40 w-52 mr-20 md:h-64 md:w-80 md:mr-64 mt-14">
-               
-         <h2 class="mb-2.5 mr-16 md:mb-2 md:mr-72 mt-6 text-gray-500" >چه کارهایی امروز برای انجام داری؟</h2>
-         <p class=" mr-5 md:mr-64 md:text-3xs text-gray-400 ">میتونی الان تسک‌هاتو اینجا بنویسی و برنامه ریزی رو شروع کنی!</p>
+        <img src="./assets/images/2143202_Artboard 1.png" alt="image" class="h-40 w-52 mr-20 md:h-64 md:w-80 md:mr-64 mt-14">
+              
+        <h2 class="mb-2.5 mr-16 md:mb-2 md:mr-72 mt-6 text-gray-500" >چه کارهایی امروز برای انجام داری؟</h2>
+        <p class=" mr-5 md:mr-64 md:text-3xs text-gray-400 ">میتونی الان تسک‌هاتو اینجا بنویسی و برنامه ریزی رو شروع کنی!</p>
     
-       ` ; 
+      ` ; 
       container.appendChild(div) ;
+      
+
     }
   }
 }
@@ -220,6 +245,7 @@ form.addEventListener("submit", (e) => {
   //submitButton.classList.remove("bg-blue-600", "hover:cursor-pointer"); 
   //submitButton.classList.add("bg-blue-400", "hover:cursor-not-allowed"); 
 });
+
 
 
 
@@ -375,4 +401,3 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
     });
   });
 });
-
