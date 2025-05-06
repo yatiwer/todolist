@@ -22,12 +22,27 @@ toggleTheme.addEventListener("click", () => {
 
 //////////Display the form and create a new task based on the selected priority
 
+
+
 const addTaskbutton = document.querySelector('.add-task-btn');
 const form = document.querySelector('.task-From');
+
+const emptyList=document.querySelector(".empty-list") ; 
+
+console.log(addTaskbutton);
+console.log(form);
+
+
 addTaskbutton.addEventListener("click", () => {
-  if (form.classList.contains("hidden")) {
+  
+ if (form.classList.contains("hidden")) {
     form.classList.remove("hidden");
   }
+
+  
+ })
+
+
 });
 
 const addTagbutton = document.querySelector(".add-tag-btn");
@@ -39,6 +54,7 @@ addTagbutton.addEventListener("click", () => {
   }
 
 });
+
 
 let selectedPriority= 3;
 const priorityValue = document.querySelectorAll('.priority-btn');
@@ -92,6 +108,7 @@ class taskManager {
     this.listContainer = document.getElementById("list-container")
     this.loadTasksFromStorage();
     
+    
   }
   AddTask(newTask) {
     this.tasks.push(newTask);
@@ -107,7 +124,9 @@ class taskManager {
     if (data) {
       this.tasks = JSON.parse(data);
     }
+    
     this.renderTask();
+    
     
   }
   sortTask(){
@@ -142,7 +161,7 @@ class taskManager {
           <span class="task-title text-sm">${item.title}</span>
           <span class="hidden md:inline-block text-xs px-3 py-0.5 rounded-md ${tagColor} mr-4">${tagText}</span>
         </div>
-        <!-- اینجا آیکون سه‌نقطه -->
+        
         <svg xmlns="http://www.w3.org/2000/svg"
              class="w-5 h-5 text-gray-400 edit-delete-trigger cursor-pointer"
              viewBox="0 0 20 20" fill="currentColor">
@@ -156,6 +175,19 @@ class taskManager {
         
       this.listContainer.appendChild(li)
     })
+    if(this.tasks.length===0){
+      const container = document.querySelector(".container") ; 
+      const div = document.createElement("div")
+      div.className = "empty-list flex flex-col" ;
+      div.innerHTML = `
+         <img src="./assets/images/2143202_Artboard 1.png" alt="image" class="h-40 w-52 mr-20 md:h-64 md:w-80 md:mr-64 mt-14">
+               
+         <h2 class="mb-2.5 mr-16 md:mb-2 md:mr-72 mt-6 text-gray-500" >چه کارهایی امروز برای انجام داری؟</h2>
+         <p class=" mr-5 md:mr-64 md:text-3xs text-gray-400 ">میتونی الان تسک‌هاتو اینجا بنویسی و برنامه ریزی رو شروع کنی!</p>
+    
+       ` ; 
+      container.appendChild(div) ;
+    }
   }
   
 }
@@ -336,3 +368,4 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
     });
   });
 });
+
