@@ -122,12 +122,16 @@
               <p class="text-slate-400 text-sx font-semibold ">تگ ها</p>
             </div>
             <div class="tag-Form hidden  text-sm my-5 bg-white border border-gray-200 shadow-2xl rounded-md max-w-2xs">
-              <div class="flex items-center justify-around">
+              <div id="priority-options" class="flex items-center justify-around">
                 <button type="button" class="priority-btn low px-3 py-0.5 hover:cursor-pointer rounded-md text-emerald-500 bg-emerald-200 m-2 font-semibold  ">پایین</button>
                 <div class="w-px h-5 bg-gray-200 mx-1"></div>
                 <button type="button" class="priority-btn medium px-3 py-0.5 hover:cursor-pointer rounded-md text-amber-500 bg-amber-200 m-2.5 font-semibold ">متوسط</button>
                 <div class="w-px h-5 bg-gray-200 mx-1"></div>
                 <button type="button" class="priority-btn high px-3 py-0.5 hover:cursor-pointer rounded-md bg-red-100 text-red-400 m-2 font-semibold">بالا</button>
+              </div> 
+              <div id="selected-priority" class="hidden items-center justify-between gap-2 px-3 py-1 m-2 rounded-md text-sm w-fit"> 
+                <button type="button" id="remove-priority" class="text-gray-500 hover:cursor-pointer font-bold text-lg leading-none">×</button> 
+                <span id="priority-label"></span> 
               </div>
             </div>
             <hr class=" my-6 border-t border-gray-200  ">
