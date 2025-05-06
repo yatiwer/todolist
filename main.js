@@ -26,25 +26,12 @@ toggleTheme.addEventListener("click", () => {
 
 const addTaskbutton = document.querySelector('.add-task-btn');
 const form = document.querySelector('.task-From');
-
 const emptyList=document.querySelector(".empty-list") ; 
-
-console.log(addTaskbutton);
-console.log(form);
-
-
-addTaskbutton.addEventListener("click", () => {
-  
+addTaskbutton.addEventListener("click", () => { 
  if (form.classList.contains("hidden")) {
     form.classList.remove("hidden");
   }
-
-  
- })
-
-
 });
-
 const addTagbutton = document.querySelector(".add-tag-btn");
 const priorityTag = document.querySelector(".tag-Form");
 addTagbutton.addEventListener("click", () => {
@@ -52,10 +39,7 @@ addTagbutton.addEventListener("click", () => {
     priorityTag.classList.remove("hidden");
     priorityTag.style.display = "inline-block";
   }
-
 });
-
-
 let selectedPriority= 3;
 const priorityValue = document.querySelectorAll('.priority-btn');
 priorityValue.forEach(button =>{
@@ -69,7 +53,33 @@ priorityValue.forEach(button =>{
     }
   });
 });
-
+const priorityOptions = document.getElementById('priority-options'); 
+const Priority = document.getElementById('selected-priority'); 
+const priorityLabel = document.getElementById('priority-label'); 
+const removePriority = document.getElementById('remove-priority'); 
+priorityValue.forEach(btn => { 
+    btn.addEventListener('click', () => { 
+        const value = btn.textContent.trim();
+         priorityOptions.classList.add('hidden'); 
+         Priority.classList.remove('hidden'); 
+         priorityLabel.textContent = value; 
+         Priority.classList.remove( 'bg-emerald-200', 'text-emerald-700', 'bg-amber-200', 'text-amber-600', 'bg-red-100', 'text-red-600' );
+         priorityTag.classList.remove( 'bg-white', 'border' ,'border-gray-200','shadow');
+         if (value === 'پایین') { 
+            Priority.classList.add('bg-emerald-200', 'text-emerald-700');
+        } else if (value === 'متوسط') { 
+            Priority.classList.add('bg-amber-200', 'text-amber-600'); 
+        } else if (value === 'بالا') { 
+            Priority.classList.add('bg-red-100', 'text-red-600');
+        } 
+    }); 
+}); 
+removePriority.addEventListener('click', () => { 
+    Priority.classList.add('hidden'); 
+    priorityOptions.classList.remove('hidden'); 
+    priorityLabel.textContent = '';
+    priorityTag.classList.add( 'bg-white', 'border' ,'border-gray-200','shadow');
+ });
 const inputTitle =document.getElementById("title"); 
 const submitButton = document.getElementById("submitButton"); 
 inputTitle.addEventListener("input", () => { 
@@ -83,7 +93,6 @@ inputTitle.addEventListener("input", () => {
     submitButton.classList.add("bg-blue-400", "hover:cursor-not-allowed"); 
   }
 });
-
 const closeButton = document.getElementById("closeButton"); 
 closeButton.addEventListener("click", () => { 
   form.classList.add("hidden"); 
@@ -189,12 +198,10 @@ class taskManager {
       container.appendChild(div) ;
     }
   }
-  
 }
-  
 const taskmanager = new taskManager();
 form.addEventListener("submit", (e) => {
-  e.preventDefault();
+  //e.preventDefault();
   const taskTitle = document.getElementById("title");
   const taskDesc = document.getElementById("description");
   const id = Math.random() * 1000;
@@ -205,13 +212,13 @@ form.addEventListener("submit", (e) => {
     selectedPriority
   );
   taskmanager.AddTask(NewTask);
-  console.log(taskmanager);
-  taskTitle.value = "" ; 
-  taskDesc.value = "" ; 
-  selectedPriority = null ; 
-  submitButton.disabled = true; 
-  submitButton.classList.remove("bg-blue-600", "hover:cursor-pointer"); 
-  submitButton.classList.add("bg-blue-400", "hover:cursor-not-allowed"); 
+  //console.log(taskmanager);
+  //taskTitle.value = "" ; 
+  //taskDesc.value = "" ; 
+  //selectedPriority = null ; 
+  //submitButton.disabled = true; 
+  //submitButton.classList.remove("bg-blue-600", "hover:cursor-pointer"); 
+  //submitButton.classList.add("bg-blue-400", "hover:cursor-not-allowed"); 
 });
 
 
