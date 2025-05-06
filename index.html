@@ -36,13 +36,13 @@
         </nav>
         <div class="sidebar-footer flex flex-col pt-10 md:absolute md:bottom-20">
           <div class="theme-toggle flex bg-gray-100 p-4 gap-12  rounded-2xl">
-            <button type="button" id="toggle-theme" class="flex gap-2">
+            <button id="toggle-theme" class="flex gap-2">
               <img class="w-4" src="./assets/images/sun.png" alt="light_mode">روشن</button> 
-            <button type="button" id="toggle-theme" class="flex gap-2 pl-0">
+            <button id="toggle-theme" class="flex gap-2 pl-0">
               <img class="w-4 " src="./assets/images/moon.png" alt="dark_mode">تاریک</button>  
           </div> 
           <hr class="text-gray-200 pt-2 mt-3">
-          <button type="button" class="logout-btn flex gap-4"><img class="w-4" src="./assets/images/logout.png" alt="logout">خروج</button>
+          <button class="logout-btn flex gap-4"><img class="w-4" src="./assets/images/logout.png" alt="logout">خروج</button>
         </div>
              <div id="overlay" class="hidden fixed inset-0 bg-gray-400 opacity-50 z-50"></div>
     </aside>
@@ -74,9 +74,16 @@
           </ul>
         </div> -->
         </nav>
+
+       
+
       </header>
+      
+    
+
       <!-- Today's Tasks -->
       <section class="container mx-auto p-4  text-right max-w-md md:max-w-[1000px]  md:ml-46 ">
+
         <div class="hello-today flex items-center justify-start ">
           <div class="flex flex-row gap-2 items-center max-w-md md:hidden">
           <div class="user-avatar">
@@ -88,44 +95,32 @@
           </div>
         </div>
       </div>
+    
+
+
         <div class="section-header p-3 md:mt-10 ">
           <h2 class="text-xl font-bold text-gray-800 mb-1">تسک‌های امروز</h2>
+
           <p id="remaining-count" class="text-sm text-gray-500 mb-4"></p>
           <p id="no-task" class="text-2sm text-gray-500 mb-4 hidden">تسکی برای امروز نداری !</p>
           <div class="flex gap-2 border-2 border-dashed border-gray-300 rounded-xl p-3">
             <img src="./assets/images/add.png" alt="add task">
-
-            <button type="button" class="add-task-btn text-blue-600 hover:cursor-pointer">افزودن وظیفه جدید</button>
-
             <button class="add-task-btn text-blue-600 hover:cursor-pointer font-semibold">افزودن وظیفه جدید</button>
-
           </div>
+         
           <form class="task-From container mx-auto p-4 shadow rounded-lg  relative hidden mt-6 mb-2  " action="">
             <div class="flex flex-col gap-4">
               <input class="outline-none text-xl font-bold placeholder-gray-500" type="text" id="title" placeholder="نام تسک">
               <input class="outline-none text-2sm font-semibold placeholder-gray-400" type="text" id="description" placeholder="توضیحات">
             </div>
 
-            <div class="add-tag-btn flex gap-2 p-2 border-solid border-2 border-gray-200 max-w-24 rounded-[5px] hover:cursor-pointer mt-4">
-
-
             
 
 
             <div class="add-tag-btn flex gap-2 p-1 border-solid border-2 border-gray-200 max-w-20 rounded-[5px] hover:cursor-pointer mt-4">
-
               <img src="./assets/images/tag-right.png" alt="">
               <p class="text-slate-400 text-sx font-semibold ">تگ ها</p>
             </div>
-
-            <div class="tag-Form hidden  text-sm my-5 bg-white border border-gray-200 shadow rounded-md max-w-2xs">
-              <div id="priority-options" class="flex items-center justify-around">
-                  <button type="button" class="priority-btn low px-3 py-0.5 hover:cursor-pointer rounded-md text-emerald-700 bg-emerald-200 m-2">پایین</button>
-                  <div class="w-px h-5 bg-gray-200 mx-1"></div>
-                  <button type="button" class="priority-btn medium px-3 py-0.5 hover:cursor-pointer rounded-md text-amber-600 bg-amber-200 m-2.5">متوسط</button>
-                  <div class="w-px h-5 bg-gray-200 mx-1"></div>
-                  <button type="button" class="priority-btn high px-3 py-0.5 hover:cursor-pointer rounded-md bg-red-100 text-red-600 m-2">بالا</button>
-
             <div class="tag-Form hidden  text-sm my-5 bg-white border border-gray-200 shadow-2xl rounded-md max-w-2xs">
               <div class="flex items-center justify-around">
                 <button type="button" class="priority-btn low px-3 py-0.5 hover:cursor-pointer rounded-md text-emerald-500 bg-emerald-200 m-2 font-semibold  ">پایین</button>
@@ -133,28 +128,21 @@
                 <button type="button" class="priority-btn medium px-3 py-0.5 hover:cursor-pointer rounded-md text-amber-500 bg-amber-200 m-2.5 font-semibold ">متوسط</button>
                 <div class="w-px h-5 bg-gray-200 mx-1"></div>
                 <button type="button" class="priority-btn high px-3 py-0.5 hover:cursor-pointer rounded-md bg-red-100 text-red-400 m-2 font-semibold">بالا</button>
-
               </div>
-              <div id="selected-priority" class="hidden items-center justify-between gap-2 px-3 py-1 m-2 rounded-md text-sm w-fit"> 
-                  <button type="button" id="remove-priority" class="text-gray-500 hover:cursor-pointer font-bold text-lg leading-none">×</button> 
-                  <span id="priority-label"></span> 
-              </div> 
-          </div>
+            </div>
             <hr class=" my-6 border-t border-gray-200  ">
-
-            <div class=" flex gap-2 p-2 my-8 absolute left-4 bottom-4">
-              <img src="./assets/images/close-circle.png" alt="icon" class="hover:cursor-pointer" id="closeButton">
-              <button type="submit" disabled class="submit-task-btn text-sm p-2 text-white border bg-blue-400 rounded-md hover:cursor-pointer" id="submitButton">اضافه کردن تسک</button>
-
             <div class=" flex my-8 mr-44 mt-5 md:mr-[45rem] md:mt-10  gap-2 mb-0">
 
               <img src="./assets/images/close-circle.png" alt="icon" class="hover:cursor-pointer   bg-gray-100 p-3 rounded-lg " id="closeButton">
               <button type="submit" disabled class="submit-task-btn text-sm p-2 text-white border bg-blue-400 rounded-lg hover:cursor-pointer w-5xl font-semibold " id="submitButton">اضافه کردن تسک</button>
-
             </div>
           </form> 
         </div>
+
         <ul class="todays-tasks space-y-3 gap-1 md:space-y-4 p-3 " id="list-container" >
+
+        
+
           <li class="relative bg-white shadow rounded-xl p-3 pr-4 md:h-28  ">
             <div class="absolute top-0 bottom-0 right-0 w-1 bg-red-400 rounded-r-full"></div>
             <div class="flex justify-between">
