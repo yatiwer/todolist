@@ -24,15 +24,11 @@ toggleTheme.addEventListener("click", () => {
 
 const addTaskbutton = document.querySelector('.add-task-btn');
 const form = document.querySelector('.task-From');
-
-console.log(addTaskbutton);
-console.log(form);
 addTaskbutton.addEventListener("click", () => {
   if (form.classList.contains("hidden")) {
     form.classList.remove("hidden");
   }
 });
-// ???????
 
 const addTagbutton = document.querySelector(".add-tag-btn");
 const priorityTag = document.querySelector(".tag-Form");
@@ -55,9 +51,26 @@ priorityValue.forEach(button =>{
     } else if (button.classList.contains("high")) {
       selectedPriority = 1;
     }
-    
-    
   });
+});
+
+const inputTitle =document.getElementById("title"); 
+const submitButton = document.getElementById("submitButton"); 
+inputTitle.addEventListener("input", () => { 
+  if (inputTitle.value.trim() !== "") { 
+    submitButton.disabled = false; 
+    submitButton.classList.remove("bg-blue-400", "hover:cursor-not-allowed"); 
+    submitButton.classList.add("bg-blue-600", "hover:cursor-pointer"); 
+  } else { 
+    submitButton.disabled = true; 
+    submitButton.classList.remove("bg-blue-600", "hover:cursor-pointer"); 
+    submitButton.classList.add("bg-blue-400", "hover:cursor-not-allowed"); 
+  }
+});
+
+const closeButton = document.getElementById("closeButton"); 
+closeButton.addEventListener("click", () => { 
+  form.classList.add("hidden"); 
 });
 
 class task {
@@ -164,6 +177,9 @@ form.addEventListener("submit", (e) => {
   taskTitle.value = "" ; 
   taskDesc.value = "" ; 
   selectedPriority = null ; 
+  submitButton.disabled = true; 
+  submitButton.classList.remove("bg-blue-600", "hover:cursor-pointer"); 
+  submitButton.classList.add("bg-blue-400", "hover:cursor-not-allowed"); 
 });
 
 
