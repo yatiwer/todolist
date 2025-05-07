@@ -14,14 +14,20 @@
 
     <!-- Sidebar -->
 
-      <aside class="hidden md:block md:fixed md:top-4 md:right-6 md:border-gray-800 md:shadow-md md:rounded-md md:p-5 md:w-64 md:h-full z-40" id="navMenu">
-        <div class="user-avatar">
+      <aside class="hidden fixed bg-white w-96 z-[1002] md:block md:fixed md:top-4 md:right-6 md:border-gray-800 md:shadow-md md:rounded-md md:p-5 md:w-64 h-full" id="navMenu">
+       
+        <div class="user-info hidden md:block">
+           <div class="user-avatar">
           <img src="./assets/images/royaPic.png" alt="User Avatar"/>
         </div>
-        <div class="user-info">
           <h1 class="font-semibold">سلام، رویا</h1>
           <p id="today" class="text-gray-500"></p>
-
+        </div>
+        <div class="block md:hidden">
+          <div class="flex flex-row justify-between gap-3 p-4">
+            <h2>کوئرا لیست</h2>
+            <img class="block w-6 md:hidden" src="./assets/images/close-circle.png" alt="close-circle" id="closeMenu">
+          </div>
         </div>
         <nav class="sidebar-nav flex flex-col gap-24 pt-6">
           <ul class="">
@@ -44,8 +50,9 @@
           <hr class="text-gray-200 pt-2 mt-3">
           <button class="logout-btn flex gap-4"><img class="w-4" src="./assets/images/logout.png" alt="logout">خروج</button>
         </div>
-             <div id="overlay" class="hidden fixed inset-0 bg-gray-400 opacity-50 z-50"></div>
+           
     </aside>
+      <div id="overlay" class="hidden md:hidden fixed left-0 bottom-0 top-0 right-0 bg-gray-400 opacity-50 z-[1000]"></div>
 
     <!-- Main Content -->
     <main class="main-content" id="mainContent">
