@@ -1,13 +1,26 @@
-const BergurMenu = document.getElementById("BergurMenu");
-const navMenu = document.getElementById("navMenu");
+///z.kiani:sidebar
+const menuButton = document.getElementById("BergurMenu");
+const sidebar = document.getElementById("navMenu");
+const overlay = document.getElementById('overlay');
 const closeMenu = document.getElementById("closeMenu");
-//const overlay = document.getElementById("overlay");
-//const body = document.body;
+const mainContent = document.getElementById("mainContent");
 
-BergurMenu.addEventListener("click", () => {
-  navMenu.classList.toggle("hidden");
-  //overlay.classList.toggle("hidden");
-  // body.classList.toggle("overflow-hidden");
+menuButton.addEventListener('click', () => {
+  sidebar.style.right=0;
+  sidebar.style.display = "block";
+  overlay.style.display = 'block';
+  mainContent.style.display = "none";
+});
+
+closeMenu.addEventListener("click", () => {
+  sidebar.style.display = "none";
+  mainContent.style.display = "block";
+  overlay.style.display = "none";
+});
+
+overlay.addEventListener('click', () => {
+  sidebar.style.display = "block";
+  overlay.style.display = 'none';
 });
 
 const toggleTheme = document.getElementById("toggle-theme");
@@ -32,7 +45,6 @@ console.log(form);
 
 
 addTaskbutton.addEventListener("click", () => {
-     
   if (form.classList.contains("hidden")) {
     form.classList.remove("hidden");
 
