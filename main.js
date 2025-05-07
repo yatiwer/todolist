@@ -115,16 +115,13 @@ class task {
 class taskManager {
   constructor() {
     this.tasks = [];
-    this.listContainer = document.getElementById("list-container")
+    this.listContainer = document.getElementById("list-container");
     this.loadTasksFromStorage();
-    
-    
   }
   AddTask(newTask) {
     this.tasks.push(newTask);
     this.saveTasksToStorage();
     this.renderTask();
-    
   }
   saveTasksToStorage() {
     localStorage.setItem("tasks", JSON.stringify(this.tasks));
@@ -134,24 +131,21 @@ class taskManager {
     if (data) {
       this.tasks = JSON.parse(data);
     }
-    
+
     this.renderTask();
-    
-    
   }
-  sortTask(){
-    this.tasks.sort((a , b) => a.priority - b.priority) ; 
+  sortTask() {
+    this.tasks.sort((a, b) => a.priority - b.priority);
   }
-  renderTask(){
-    this.sortTask() ;
-    this.listContainer.innerHTML = "" ;
-    
-    
-    this.tasks.forEach(item => {
+  renderTask() {
+    this.sortTask();
+    this.listContainer.innerHTML = "";
+
+    this.tasks.forEach((item) => {
       let priorityColor = "bg-red-400";
       let tagColor = "bg-red-100 text-red-600";
       let tagText = "بالا";
-  
+
       if (item.priority === 2) {
         priorityColor = "bg-yellow-400";
         tagColor = "bg-yellow-100 text-yellow-600";
@@ -161,8 +155,9 @@ class taskManager {
         tagColor = "bg-green-200 text-green-600";
         tagText = "پایین";
       }
-      const li = document.createElement("li") ; 
-      li.className = "relative bg-white shadow rounded-xl p-3 pr-4 md:h-28  " ;
+      const li = document.createElement("li");
+      li.dataset.id = item.id;
+      li.className = "relative bg-white shadow rounded-xl p-3 pr-4 md:h-28  ";
       li.innerHTML = `
       <div class="absolute top-0 bottom-0 right-0 w-1 ${priorityColor} rounded-r-full"></div>
       <div class="flex justify-between items-start">
@@ -181,30 +176,42 @@ class taskManager {
       <span class="inline-block md:hidden text-xs px-3 py-0.5 rounded-md ${tagColor} mr-4">${tagText}</span>
       <p class="task-desc text-sm text-gray-500 mb-4 p-4">${item.description}</p>
     `;
-    
-        
-      this.listContainer.appendChild(li)
-    })
-    if(this.tasks.length===0){
+
+      this.listContainer.appendChild(li);
+    });
+    if (this.tasks.length === 0) {
       document.getElementById("remaining-count").classList.add("hidden");
       document.getElementById("no-task").classList.remove("hidden");
 
-      const container = document.querySelector(".container") ; 
-      const div = document.createElement("div")
-      div.className = "empty-list flex flex-col" ;
+      const container = document.querySelector(".container");
+      const div = document.createElement("div");
+      div.className = "empty-list flex flex-col";
       div.innerHTML = `
         <img src="./assets/images/2143202_Artboard 1.png" alt="image" class="h-40 w-52 mr-20 md:h-64 md:w-80 md:mr-64 mt-14">
               
         <h2 class="mb-2.5 mr-16 md:mb-2 md:mr-72 mt-6 text-gray-500" >چه کارهایی امروز برای انجام داری؟</h2>
         <p class=" mr-5 md:mr-64 md:text-3xs text-gray-400 ">میتونی الان تسک‌هاتو اینجا بنویسی و برنامه ریزی رو شروع کنی!</p>
     
-      ` ; 
-      container.appendChild(div) ;
-      
-
+      `;
+      container.appendChild(div);
     }
   }
-  
+
+  //z.Kiani:get id when click on the button and then remove  it
+  AddEventListeners() {
+    document.querySelectorAll("#delete-btn").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        this.RemoveTask(e);
+      });
+    });
+  }
+  //z.Kiani:remove  task
+  RemoveTask(e) {
+    const taskid = e.target.closest("li").dataset.id;
+    this.tasks = this.tasks.filter((item) => item.id != taskid);
+    localStorage.setItem("tasks", JSON.stringify(this.tasks));
+    this.renderTask();
+  }
 }
   
 const taskmanager = new taskManager();
@@ -348,16 +355,17 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
   trigger.addEventListener('click', function(e) {
     e.stopPropagation();
 
-    const taskItem = this.closest('li');
-    const existingMenu = taskItem.querySelector('.edit-delete-menu');
+    const taskItem = this.closest("li");
+    const existingMenu = taskItem.querySelector(".edit-delete-menu");
     if (existingMenu) {
       existingMenu.remove();
       return;
     }
 
-    const menu = document.createElement('div');
-    
-    menu.className = 'edit-delete-menu absolute top-0 right-full mr-2 bg-white shadow rounded p-2 flex flex-col gap-2';
+    const menu = document.createElement("div");
+
+    menu.className =
+      "edit-delete-menu absolute top-0 right-full mr-2 bg-white shadow rounded p-2 flex flex-col gap-2";
     menu.innerHTML = `
       <button class="edit-btn flex items-center gap-1 hover:text-blue-600 cursor-pointer edit-delete-trigger">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -366,7 +374,7 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
         </svg>
         
       </button>
-      <button class="delete-btn flex items-center gap-1 hover:text-red-600 cursor-pointer edit-delete-trigger">
+      <button id='delete-btn' class="flex items-center gap-1 hover:text-red-600 cursor-pointer edit-delete-trigger">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M6 18L18 6M6 6l12 12" />
@@ -376,10 +384,14 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
     `;
     taskItem.append(menu);
 
-    document.addEventListener('click', function closeMenu(ev) {
+    //z.kiani:for calling Delete button
+    taskmanager.AddEventListeners();
+
+
+    document.addEventListener("click", function closeMenu(ev) {
       if (!menu.contains(ev.target) && ev.target !== trigger) {
         menu.remove();
-        document.removeEventListener('click', closeMenu);
+        document.removeEventListener("click", closeMenu);
       }
     });
   });
