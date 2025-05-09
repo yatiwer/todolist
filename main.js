@@ -185,7 +185,7 @@ class taskManager {
       li.dataset.id = item.id;
       li.className = "relative bg-white shadow rounded-xl p-3 pr-4 md:h-28  ";
       li.innerHTML = `
-      <div class="absolute top-0 bottom-0 right-0 w-1 ${priorityColor} rounded-r-full"></div>
+      <div class="absolute top-4 bottom-4 right-0 w-1 ${priorityColor} rounded-l-full"></div>
       <div class="flex justify-between items-start">
         <div class="flex items-center gap-3 mb-2">
           <input type="checkbox" class="w-3 h-3 text-blue-500 form-checkbox" />
