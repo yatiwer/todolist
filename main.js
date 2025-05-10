@@ -221,8 +221,166 @@ class taskManager {
       `;
       container.appendChild(div);
     }
-  }
+    document.addEventListener('DOMContentLoaded', function() {
+    const todaysList = document.querySelector('.todays-tasks');
+    const completedList = document.querySelector('.completed-tasks');
 
+    
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    completedList.innerHTML = ''; 
+    tasks.filter(task => task.isCompleted)
+   .sort((a, b) => a.completedAt - b.completedAt)
+   .forEach(task => { 
+    const li = document.createElement('li');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = true;
+    li.appendChild(checkbox);
+    li.appendChild(document.createTextNode(task.text));
+    completedList.appendChild(li);
+    });
+
+    
+    todaysList.addEventListener('change', function(e) {
+    if (e.target.matches('input[type="checkbox"]') && e.target.checked) {
+    const listItem = e.target.closest('li');
+    const taskText = listItem.textContent.trim();
+
+            
+    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let taskObj = tasks.find(t => t.text === taskText);
+    if (!taskObj) {
+    taskObj = { text: taskText, isCompleted: true, completedAt: Date.now() };
+    tasks.push(taskObj);
+    } else {
+    taskObj.isCompleted = true;
+    taskObj.completedAt = Date.now();
+    }
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+            
+    completedList.appendChild(listItem);
+
+            
+    if (typeof countRemainingTasks === 'function') {
+    countRemainingTasks();
+      }
+    }
+    });
+
+    
+    completedList.addEventListener('change', function(e) {
+    if (e.target.matches('input[type="checkbox"]') && !e.target.checked) {
+    const listItem = e.target.closest('li');
+    const taskText = listItem.textContent.trim();
+
+            
+    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks = tasks.filter(t => t.text !== taskText);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            
+    todaysList.appendChild(listItem);
+
+            
+    if (typeof countRemainingTasks === 'function') {
+    countRemainingTasks();
+      }
+    }
+  });
+});
+document.addEventListener("DOMContentLoaded", function() {
+    var headings = document.querySelectorAll("h1, h2, h3, h4");
+    var completedHeading = null;
+    for (var i = 0; i < headings.length; i++) {
+      var text = headings[i].textContent;
+    if (text.indexOf("تسک") !== -1 && text.indexOf("انجام") !== -1) {
+    completedHeading = headings[i];
+    break;
+    }
+  }
+    var countEl = null;
+    if (completedHeading) {
+        countEl = document.createElement("div");
+        countEl.id = "completed-count";
+        completedHeading.parentNode.insertBefore(countEl, completedHeading.nextSibling);
+    }
+    function toPersian(num) {
+        var farsiDigits = ["۰","۱","۲","۳","۴","۵","۶","۷","۸","۹"];
+        return num.toString().split("").map(function(d) {
+            return farsiDigits[parseInt(d)] || d;
+        }).join("");
+    }
+ function updateCompletedCount() {
+  if (!countEl) return;
+
+  
+  countEl.classList.add(
+    "text-sm",
+    "text-gray-500",
+    "mt-2",
+    "font-medium"
+  );
+
+  
+  var count = document.querySelectorAll(
+    ".completed-tasks li"
+  ).length;
+
+ 
+  countEl.textContent = toPersian(count) + " تسک انجام شده است";
+}
+
+    function hideLabels(task) {
+    var prioWords = ["بالا","متوسط","پایین"];
+    var descendants = task.querySelectorAll("*");
+    for (var k = 0; k < descendants.length; k++) {
+    var el = descendants[k];
+    if (prioWords.indexOf(el.textContent.trim()) !== -1) {
+    el.style.display = "none";
+            }
+        }
+    }
+    function showLabels(task) {
+    var prioWords = ["بالا","متوسط","پایین"];
+    var descendants = task.querySelectorAll("*");
+    for (var k = 0; k < descendants.length; k++) {
+    var el = descendants[k];
+    if (prioWords.indexOf(el.textContent.trim()) !== -1) {
+    el.style.display = "";
+            }
+        }
+    }
+    var completedList = document.querySelector(".completed-tasks");
+    if (completedList) {
+    var items = completedList.querySelectorAll("li");
+    for (var j = 0; j < items.length; j++) {
+    hideLabels(items[j]);
+        }
+    }
+    updateCompletedCount();
+    if (completedList) {
+    var observer = new MutationObserver(function(mutations) {
+    for (var m = 0; m < mutations.length; m++) {
+    var mutation = mutations[m];
+    for (var a = 0; a < mutation.addedNodes.length; a++) {
+    var node = mutation.addedNodes[a];
+    if (node.nodeType === 1) {
+    hideLabels(node);
+           }
+        }
+    for (var b = 0; b < mutation.removedNodes.length; b++) {
+    var node = mutation.removedNodes[b];
+    if (node.nodeType === 1) {
+    showLabels(node);
+          }
+         }
+        }
+    updateCompletedCount();
+    });
+    observer.observe(completedList, { childList: true });
+  }
+});
+ }
   //z.Kiani:get id when click on the button and then remove  it
   AddEventListeners() {
     document.querySelectorAll("#delete-btn").forEach((button) => {
@@ -386,7 +544,7 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
     if (existingMenu) {
       existingMenu.remove();
       return;
-    }
+       }  
 
     const menu = document.createElement("div");
 
