@@ -199,11 +199,21 @@ class taskManager {
 
   //z.Kiani:get id when click on the button and then remove  it
   AddEventListeners() {
-    document.querySelectorAll("#delete-btn").forEach((button) => {
+    document.querySelectorAll(".edit-btn").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        this.EditTask(e);
+      });
+    });
+
+    document.querySelectorAll(".delete-btn").forEach((button) => {
       button.addEventListener("click", (e) => {
         this.RemoveTask(e);
       });
     });
+  }
+  EditTask(e){
+      const taskid = e.target.closest("li").dataset.id;
+      console.log(`Edit id ${taskid}`)
   }
   //z.Kiani:remove  task
   RemoveTask(e) {
@@ -374,7 +384,7 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
         </svg>
         
       </button>
-      <button id='delete-btn' class="flex items-center gap-1 hover:text-red-600 cursor-pointer edit-delete-trigger">
+      <button class="delete-btn flex items-center gap-1 hover:text-red-600 cursor-pointer edit-delete-trigger">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M6 18L18 6M6 6l12 12" />
