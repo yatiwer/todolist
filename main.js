@@ -3,7 +3,8 @@ const menuButton = document.getElementById("BergurMenu");
 const sidebar = document.getElementById("navMenu");
 const overlay = document.getElementById('overlay');
 const closeMenu = document.getElementById("closeMenu");
-const mainContent = document.getElementById("mainContent");
+//const mainContent = document.getElementById("mainContent");
+const mainContent = document.querySelector(".main-content");
 
 menuButton.addEventListener('click', () => {
   sidebar.style.right=0;
@@ -19,8 +20,22 @@ closeMenu.addEventListener("click", () => {
 });
 
 overlay.addEventListener('click', () => {
-  sidebar.style.display = "block";
+  sidebar.style.display = 'none';
   overlay.style.display = 'none';
+  mainContent.style.display = "block";
+});
+
+window.addEventListener("resize", ()  =>{
+  if (window.innerWidth > 768) {
+     sidebar.style.display = "block";
+     mainContent.style.display = "block";
+     overlay.style.display = "none";
+  }
+  else{
+    sidebar.style.display = "none";
+    mainContent.style.display = "block";
+    overlay.style.display = "none";
+  }
 });
 
 const toggleTheme = document.getElementById("toggle-theme");
@@ -31,7 +46,6 @@ toggleTheme.addEventListener("click", () => {
     document.documentElement.classList.add("dark");
   }
 });
-
 
 //////////Display the form and create a new task based on the selected priority
 
@@ -383,11 +397,21 @@ document.addEventListener("DOMContentLoaded", function() {
  }
   //z.Kiani:get id when click on the button and then remove  it
   AddEventListeners() {
-    document.querySelectorAll("#delete-btn").forEach((button) => {
+    document.querySelectorAll(".edit - btn").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        this.EditTask(e);
+      });
+    });
+
+    document.querySelectorAll(".delete-btn").forEach((button) => {
       button.addEventListener("click", (e) => {
         this.RemoveTask(e);
       });
     });
+  }
+  EditTask(e){
+      const taskid = e.target.closest("li").dataset.id;
+      console.log(`Edit id ${taskid}`)
   }
   //z.Kiani:remove  task
   RemoveTask(e) {
@@ -397,6 +421,7 @@ document.addEventListener("DOMContentLoaded", function() {
     this.renderTask();
   }
 }
+  
   
 const taskmanager = new taskManager();
 form.addEventListener("submit", (e) => {
