@@ -3,7 +3,8 @@ const menuButton = document.getElementById("BergurMenu");
 const sidebar = document.getElementById("navMenu");
 const overlay = document.getElementById('overlay');
 const closeMenu = document.getElementById("closeMenu");
-const mainContent = document.getElementById("mainContent");
+//const mainContent = document.getElementById("mainContent");
+const mainContent = document.querySelector(".main-content");
 
 menuButton.addEventListener('click', () => {
   sidebar.style.right=0;
@@ -19,8 +20,22 @@ closeMenu.addEventListener("click", () => {
 });
 
 overlay.addEventListener('click', () => {
-  sidebar.style.display = "block";
+  sidebar.style.display = 'none';
   overlay.style.display = 'none';
+  mainContent.style.display = "block";
+});
+
+window.addEventListener("resize", ()  =>{
+  if (window.innerWidth > 768) {
+     sidebar.style.display = "block";
+     mainContent.style.display = "block";
+     overlay.style.display = "none";
+  }
+  else{
+    sidebar.style.display = "none";
+    mainContent.style.display = "block";
+    overlay.style.display = "none";
+  }
 });
 
 const toggleTheme = document.getElementById("toggle-theme");
@@ -31,7 +46,6 @@ toggleTheme.addEventListener("click", () => {
     document.documentElement.classList.add("dark");
   }
 });
-
 
 //////////Display the form and create a new task based on the selected priority
 
@@ -79,7 +93,33 @@ priorityValue.forEach(button =>{
     }
   });
 });
-
+const priorityOptions = document.getElementById('priority-options'); 
+const Priority = document.getElementById('selected-priority'); 
+const priorityLabel = document.getElementById('priority-label'); 
+const removePriority = document.getElementById('remove-priority'); 
+priorityValue.forEach(btn => { 
+    btn.addEventListener('click', () => { 
+        const value = btn.textContent.trim();
+         priorityOptions.classList.add('hidden'); 
+         Priority.classList.remove('hidden'); 
+         priorityLabel.textContent = value; 
+         Priority.classList.remove( 'bg-emerald-200', 'text-emerald-700', 'bg-amber-200', 'text-amber-600', 'bg-red-100', 'text-red-600' );
+         priorityTag.classList.remove( 'bg-white', 'border' ,'border-gray-200','shadow-2xl', 'rounded-md');
+         if (value === 'پایین') { 
+            Priority.classList.add('bg-emerald-200', 'text-emerald-700');
+        } else if (value === 'متوسط') { 
+            Priority.classList.add('bg-amber-200', 'text-amber-600'); 
+        } else if (value === 'بالا') { 
+            Priority.classList.add('bg-red-100', 'text-red-600');
+        } 
+    }); 
+}); 
+removePriority.addEventListener('click', () => { 
+    Priority.classList.add('hidden'); 
+    priorityOptions.classList.remove('hidden'); 
+    priorityLabel.textContent = '';
+    priorityTag.classList.add( 'bg-white', 'border' ,'border-gray-200','shadow');
+ });
 const inputTitle =document.getElementById("title"); 
 const submitButton = document.getElementById("submitButton"); 
 inputTitle.addEventListener("input", () => { 
@@ -159,7 +199,7 @@ class taskManager {
       li.dataset.id = item.id;
       li.className = "relative bg-white shadow rounded-xl p-3 pr-4 md:h-28  ";
       li.innerHTML = `
-      <div class="absolute top-0 bottom-0 right-0 w-1 ${priorityColor} rounded-r-full"></div>
+      <div class="absolute top-4 bottom-4 right-0 w-1 ${priorityColor} rounded-l-full"></div>
       <div class="flex justify-between items-start">
         <div class="flex items-center gap-3 mb-2">
           <input type="checkbox" class="w-3 h-3 text-blue-500 form-checkbox" />
@@ -195,11 +235,169 @@ class taskManager {
       `;
       container.appendChild(div);
     }
-  }
+    document.addEventListener('DOMContentLoaded', function() {
+    const todaysList = document.querySelector('.todays-tasks');
+    const completedList = document.querySelector('.completed-tasks');
 
+    
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    completedList.innerHTML = ''; 
+    tasks.filter(task => task.isCompleted)
+   .sort((a, b) => a.completedAt - b.completedAt)
+   .forEach(task => { 
+    const li = document.createElement('li');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = true;
+    li.appendChild(checkbox);
+    li.appendChild(document.createTextNode(task.text));
+    completedList.appendChild(li);
+    });
+
+    
+    todaysList.addEventListener('change', function(e) {
+    if (e.target.matches('input[type="checkbox"]') && e.target.checked) {
+    const listItem = e.target.closest('li');
+    const taskText = listItem.textContent.trim();
+
+            
+    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let taskObj = tasks.find(t => t.text === taskText);
+    if (!taskObj) {
+    taskObj = { text: taskText, isCompleted: true, completedAt: Date.now() };
+    tasks.push(taskObj);
+    } else {
+    taskObj.isCompleted = true;
+    taskObj.completedAt = Date.now();
+    }
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+            
+    completedList.appendChild(listItem);
+
+            
+    if (typeof countRemainingTasks === 'function') {
+    countRemainingTasks();
+      }
+    }
+    });
+
+    
+    completedList.addEventListener('change', function(e) {
+    if (e.target.matches('input[type="checkbox"]') && !e.target.checked) {
+    const listItem = e.target.closest('li');
+    const taskText = listItem.textContent.trim();
+
+            
+    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks = tasks.filter(t => t.text !== taskText);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            
+    todaysList.appendChild(listItem);
+
+            
+    if (typeof countRemainingTasks === 'function') {
+    countRemainingTasks();
+      }
+    }
+  });
+});
+document.addEventListener("DOMContentLoaded", function() {
+    var headings = document.querySelectorAll("h1, h2, h3, h4");
+    var completedHeading = null;
+    for (var i = 0; i < headings.length; i++) {
+      var text = headings[i].textContent;
+    if (text.indexOf("تسک") !== -1 && text.indexOf("انجام") !== -1) {
+    completedHeading = headings[i];
+    break;
+    }
+  }
+    var countEl = null;
+    if (completedHeading) {
+        countEl = document.createElement("div");
+        countEl.id = "completed-count";
+        completedHeading.parentNode.insertBefore(countEl, completedHeading.nextSibling);
+    }
+    function toPersian(num) {
+        var farsiDigits = ["۰","۱","۲","۳","۴","۵","۶","۷","۸","۹"];
+        return num.toString().split("").map(function(d) {
+            return farsiDigits[parseInt(d)] || d;
+        }).join("");
+    }
+ function updateCompletedCount() {
+  if (!countEl) return;
+
+  
+  countEl.classList.add(
+    "text-sm",
+    "text-gray-500",
+    "mt-2",
+    "font-medium"
+  );
+
+  
+  var count = document.querySelectorAll(
+    ".completed-tasks li"
+  ).length;
+
+ 
+  countEl.textContent = toPersian(count) + " تسک انجام شده است";
+}
+
+    function hideLabels(task) {
+    var prioWords = ["بالا","متوسط","پایین"];
+    var descendants = task.querySelectorAll("*");
+    for (var k = 0; k < descendants.length; k++) {
+    var el = descendants[k];
+    if (prioWords.indexOf(el.textContent.trim()) !== -1) {
+    el.style.display = "none";
+            }
+        }
+    }
+    function showLabels(task) {
+    var prioWords = ["بالا","متوسط","پایین"];
+    var descendants = task.querySelectorAll("*");
+    for (var k = 0; k < descendants.length; k++) {
+    var el = descendants[k];
+    if (prioWords.indexOf(el.textContent.trim()) !== -1) {
+    el.style.display = "";
+            }
+        }
+    }
+    var completedList = document.querySelector(".completed-tasks");
+    if (completedList) {
+    var items = completedList.querySelectorAll("li");
+    for (var j = 0; j < items.length; j++) {
+    hideLabels(items[j]);
+        }
+    }
+    updateCompletedCount();
+    if (completedList) {
+    var observer = new MutationObserver(function(mutations) {
+    for (var m = 0; m < mutations.length; m++) {
+    var mutation = mutations[m];
+    for (var a = 0; a < mutation.addedNodes.length; a++) {
+    var node = mutation.addedNodes[a];
+    if (node.nodeType === 1) {
+    hideLabels(node);
+           }
+        }
+    for (var b = 0; b < mutation.removedNodes.length; b++) {
+    var node = mutation.removedNodes[b];
+    if (node.nodeType === 1) {
+    showLabels(node);
+          }
+         }
+        }
+    updateCompletedCount();
+    });
+    observer.observe(completedList, { childList: true });
+  }
+});
+ }
   //z.Kiani:get id when click on the button and then remove  it
   AddEventListeners() {
-    document.querySelectorAll(".edit-btn").forEach((button) => {
+    document.querySelectorAll(".edit - btn").forEach((button) => {
       button.addEventListener("click", (e) => {
         this.EditTask(e);
       });
@@ -224,9 +422,10 @@ class taskManager {
   }
 }
   
+  
 const taskmanager = new taskManager();
 form.addEventListener("submit", (e) => {
-  e.preventDefault();
+  //e.preventDefault();
   const taskTitle = document.getElementById("title");
   const taskDesc = document.getElementById("description");
   const id = Math.random() * 1000;
@@ -370,7 +569,7 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
     if (existingMenu) {
       existingMenu.remove();
       return;
-    }
+       }  
 
     const menu = document.createElement("div");
 
@@ -384,7 +583,7 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
         </svg>
         
       </button>
-      <button class="delete-btn flex items-center gap-1 hover:text-red-600 cursor-pointer edit-delete-trigger">
+      <button id='delete-btn' class="flex items-center gap-1 hover:text-red-600 cursor-pointer edit-delete-trigger">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M6 18L18 6M6 6l12 12" />
