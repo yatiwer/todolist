@@ -205,6 +205,8 @@ class taskManager {
   renderTask() {
     this.sortTask();
     this.listContainer.innerHTML = "";
+     const completedContainer = document.querySelector(".completed-tasks"); 
+    completedContainer.innerHTML = "";
 
     this.tasks.forEach((item) => {
       let priorityColor = "bg-red-400";
@@ -241,8 +243,19 @@ class taskManager {
       <span class="inline-block md:hidden text-xs px-3 py-0.5 rounded-md ${tagColor} mr-4">${tagText}</span>
       <p class="task-desc text-sm text-gray-500 mb-4 p-4">${item.description}</p>
     `;
+       const checkbox = li.querySelector("input[type='checkbox']"); 
+    const titleSpan = li.querySelector(".task-title"); 
+    const descP = li.querySelector(".task-desc"); 
 
-      this.listContainer.appendChild(li);
+    if (item.isCompleted) { 
+      checkbox.checked = true; 
+      titleSpan.classList.add("line-through"); 
+      if (descP) descP.classList.add("line-through"); 
+      completedContainer.appendChild(li); 
+    } else { 
+      this.listContainer.appendChild(li); 
+    }
+      
     });
     
     if (this.tasks.length === 0) {
@@ -261,75 +274,7 @@ class taskManager {
       `;
       container.appendChild(div);
     }
-    document.addEventListener('DOMContentLoaded', function() {
-    const todaysList = document.querySelector('.todays-tasks');
-    const completedList = document.querySelector('.completed-tasks');
-
-    
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    completedList.innerHTML = ''; 
-    tasks.filter(task => task.isCompleted)
-   .sort((a, b) => a.completedAt - b.completedAt)
-   .forEach(task => { 
-    const li = document.createElement('li');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.checked = true;
-    li.appendChild(checkbox);
-    completedList.appendChild(li);
-    });
-
-    
-    todaysList.addEventListener('change', function(e) {
-    if (e.target.matches('input[type="checkbox"]') && e.target.checked) {
-    const listItem = e.target.closest('li');
-    const taskText = listItem.textContent.trim();
-
-            
-    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    let taskObj = tasks.find(t => t.title === taskTitle);
-    if (!taskObj) {
-    taskObj = { text: taskText, isCompleted: true, completedAt: Date.now() };
-    tasks.push(taskObj);
-    } else {
-    taskObj.isCompleted = true;
-    taskObj.completedAt = Date.now();
-    }
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-            
-    completedList.appendChild(listItem);
-
-            
-    if (typeof countRemainingTasks === 'function') {
-    countRemainingTasks();
-      }
-    }
-    });
-
-    
-    completedList.addEventListener('change', function(e) {
-    if (e.target.matches('input[type="checkbox"]') && !e.target.checked) {
-    const listItem = e.target.closest('li');
-     completedList.appendChild(taskItem);
-  const ts = taskItem.querySelector('.task-title');
-  if (ts) ts.style.display = 'none';
-    const taskText = listItem.textContent.trim();
-
-            
-    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks = tasks.filter(t => t.title !== taskTitle);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-
-            
-    todaysList.appendChild(listItem);
-
-            
-    if (typeof countRemainingTasks === 'function') {
-    countRemainingTasks();
-      }
-    }
-  });
-});
+   
 document.addEventListener("DOMContentLoaded", function() {
     var headings = document.querySelectorAll("h1, h2, h3, h4");
     var completedHeading = null;
