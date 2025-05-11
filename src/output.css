@@ -902,6 +902,15 @@
   }
 }
 @layer components {
+  .completed-tasks .task-title {
+  display: none !important;
+  }
+  .completed-tasks {
+  padding: 0.75rem;    
+  }
+ .completed-tasks {
+    @apply p-3;
+  }
   .card {
     margin-top: calc(var(--spacing) * 10);
     display: flex;
