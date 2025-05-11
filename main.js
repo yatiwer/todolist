@@ -4,6 +4,7 @@ const sidebar = document.getElementById("navMenu");
 const overlay = document.getElementById('overlay');
 const closeMenu = document.getElementById("closeMenu");
 const mainContent = document.getElementById("mainContent");
+//const mainContent = document.querySelector(".main-content");
 
 menuButton.addEventListener('click', () => {
   sidebar.style.right=0;
@@ -19,17 +20,55 @@ closeMenu.addEventListener("click", () => {
 });
 
 overlay.addEventListener('click', () => {
-  sidebar.style.display = "block";
+  sidebar.style.display = 'none';
   overlay.style.display = 'none';
+  mainContent.style.display = "block";
 });
 
-const toggleTheme = document.getElementById("toggle-theme");
-toggleTheme.addEventListener("click", () => {
-  if (document.documentElement.classList.contains("dark")) {
-    document.documentElement.classList.remove("dark");
-  } else {
-    document.documentElement.classList.add("dark");
+window.addEventListener("resize", ()  =>{
+  if (window.innerWidth > 768) {
+     sidebar.style.display = "block";
+     mainContent.style.display = "block";
+     overlay.style.display = "none";
   }
+  else{
+    sidebar.style.display = "none";
+    mainContent.style.display = "block";
+    overlay.style.display = "none";
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleTheme = document.getElementById("toggle-theme");
+  const themeIcon   = document.getElementById("theme-icon");
+  const themeText   = document.getElementById("theme-text");
+
+  if (!toggleTheme || !themeIcon || !themeText) return;
+
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+    themeIcon.src = "./assets/images/sun.png";
+    themeText.textContent = 'روشن';
+  } else {
+    document.documentElement.classList.remove('dark');
+    themeIcon.src = "./assets/images/moon.png";
+    themeText.textContent = 'تاریک';
+  }
+
+  toggleTheme.addEventListener("click", () => {
+    if (document.documentElement.classList.contains("dark")) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem('theme', 'light');
+      themeIcon.src = "./assets/images/moon.png";
+      themeText.textContent = 'تاریک';
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem('theme', 'dark');
+      themeIcon.src = "./assets/images/sun.png";
+      themeText.textContent = 'روشن';
+    }
+  });
 });
 
 
@@ -166,6 +205,8 @@ class taskManager {
   renderTask() {
     this.sortTask();
     this.listContainer.innerHTML = "";
+    const completedContainer = document.querySelector(".completed-tasks"); 
+    completedContainer.innerHTML = "";
 
     this.tasks.forEach((item) => {
       let priorityColor = "bg-red-400";
@@ -203,9 +244,9 @@ class taskManager {
       <p class="task-desc text-sm text-gray-500 mb-4 p-4">${item.description}</p>
     `;
 
-      this.listContainer.appendChild(li);
-      
+     this.listContainer.appendChild(li);
     });
+    
     if (this.tasks.length === 0) {
       document.getElementById("remaining-count").classList.add("hidden");
       document.getElementById("no-task").classList.remove("hidden");
@@ -222,73 +263,7 @@ class taskManager {
       `;
       container.appendChild(div);
     }
-    document.addEventListener('DOMContentLoaded', function() {
-    const todaysList = document.querySelector('.todays-tasks');
-    const completedList = document.querySelector('.completed-tasks');
-
-    
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    completedList.innerHTML = ''; 
-    tasks.filter(task => task.isCompleted)
-   .sort((a, b) => a.completedAt - b.completedAt)
-   .forEach(task => { 
-    const li = document.createElement('li');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.checked = true;
-    li.appendChild(checkbox);
-    li.appendChild(document.createTextNode(task.text));
-    completedList.appendChild(li);
-    });
-
-    
-    todaysList.addEventListener('change', function(e) {
-    if (e.target.matches('input[type="checkbox"]') && e.target.checked) {
-    const listItem = e.target.closest('li');
-    const taskText = listItem.textContent.trim();
-
-            
-    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    let taskObj = tasks.find(t => t.text === taskText);
-    if (!taskObj) {
-    taskObj = { text: taskText, isCompleted: true, completedAt: Date.now() };
-    tasks.push(taskObj);
-    } else {
-    taskObj.isCompleted = true;
-    taskObj.completedAt = Date.now();
-    }
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-            
-    completedList.appendChild(listItem);
-
-            
-    if (typeof countRemainingTasks === 'function') {
-    countRemainingTasks();
-      }
-    }
-    });
-
-    
-    completedList.addEventListener('change', function(e) {
-    if (e.target.matches('input[type="checkbox"]') && !e.target.checked) {
-    const listItem = e.target.closest('li');
-    const taskText = listItem.textContent.trim();
-
-            
-    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks = tasks.filter(t => t.text !== taskText);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-
-            
-    todaysList.appendChild(listItem);
-
-            
-    if (typeof countRemainingTasks === 'function') {
-    countRemainingTasks();
-      }
-    }
-  });
-});
+   
 document.addEventListener("DOMContentLoaded", function() {
     var headings = document.querySelectorAll("h1, h2, h3, h4");
     var completedHeading = null;
@@ -384,11 +359,21 @@ document.addEventListener("DOMContentLoaded", function() {
  }
   //z.Kiani:get id when click on the button and then remove  it
   AddEventListeners() {
-    document.querySelectorAll("#delete-btn").forEach((button) => {
+    document.querySelectorAll(".edit-btn").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        this.EditTask(e);
+      });
+    });
+
+    document.querySelectorAll(".delete-btn").forEach((button) => {
       button.addEventListener("click", (e) => {
         this.RemoveTask(e);
       });
     });
+  }
+  EditTask(e){
+      const taskid = e.target.closest("li").dataset.id;
+      console.log(`Edit id ${taskid}`)
   }
   //z.Kiani:remove  task
   RemoveTask(e) {
@@ -398,6 +383,7 @@ document.addEventListener("DOMContentLoaded", function() {
     this.renderTask();
   }
 }
+  
   
 const taskmanager = new taskManager();
 form.addEventListener("submit", (e) => {
@@ -521,15 +507,19 @@ document.addEventListener("change", function(e) {
     const completedList = document.querySelector(".completed-tasks");
 
     if (e.target.checked) {
-      // تیک خورد → تکسک انجام شده
+      
       completedList.appendChild(taskItem);
       titleSpan.classList.add("line-through");
-      
+       const descP = taskItem.querySelector('.task-desc');
+       if (descP) descP.classList.add('line-through');
 
     } else {
-      // تیک برداشته شد → برمی‌گرده تو تسک‌های امروز
+      
       todaysList.appendChild(taskItem);
       titleSpan.classList.remove("line-through");
+      titleSpan.classList.remove("line-through");
+      const descP = taskItem.querySelector('.task-desc');
+      if (descP) descP.classList.remove('line-through');
     }
 
     countRemainingTasks();
@@ -559,7 +549,7 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
         </svg>
         
       </button>
-      <button id='delete-btn' class="flex items-center gap-1 hover:text-red-600 cursor-pointer edit-delete-trigger">
+      <button class="delete-btn flex items-center gap-1 hover:text-red-600 cursor-pointer edit-delete-trigger">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M6 18L18 6M6 6l12 12" />
