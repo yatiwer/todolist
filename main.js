@@ -204,6 +204,7 @@ class taskManager {
     `;
 
       this.listContainer.appendChild(li);
+      
     });
     if (this.tasks.length === 0) {
       document.getElementById("remaining-count").classList.add("hidden");
