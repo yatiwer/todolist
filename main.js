@@ -3,8 +3,8 @@ const menuButton = document.getElementById("BergurMenu");
 const sidebar = document.getElementById("navMenu");
 const overlay = document.getElementById('overlay');
 const closeMenu = document.getElementById("closeMenu");
-//const mainContent = document.getElementById("mainContent");
-const mainContent = document.querySelector(".main-content");
+const mainContent = document.getElementById("mainContent");
+//const mainContent = document.querySelector(".main-content");
 
 menuButton.addEventListener('click', () => {
   sidebar.style.right=0;
@@ -397,7 +397,7 @@ document.addEventListener("DOMContentLoaded", function() {
  }
   //z.Kiani:get id when click on the button and then remove  it
   AddEventListeners() {
-    document.querySelectorAll(".edit - btn").forEach((button) => {
+    document.querySelectorAll(".edit-btn").forEach((button) => {
       button.addEventListener("click", (e) => {
         this.EditTask(e);
       });
