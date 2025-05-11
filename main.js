@@ -397,7 +397,7 @@ document.addEventListener("DOMContentLoaded", function() {
  }
   //z.Kiani:get id when click on the button and then remove  it
   AddEventListeners() {
-    document.querySelectorAll(".edit - btn").forEach((button) => {
+    document.querySelectorAll(".edit-btn").forEach((button) => {
       button.addEventListener("click", (e) => {
         this.EditTask(e);
       });
