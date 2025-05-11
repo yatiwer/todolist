@@ -38,14 +38,39 @@ window.addEventListener("resize", ()  =>{
   }
 });
 
-const toggleTheme = document.getElementById("toggle-theme");
-toggleTheme.addEventListener("click", () => {
-  if (document.documentElement.classList.contains("dark")) {
-    document.documentElement.classList.remove("dark");
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleTheme = document.getElementById("toggle-theme");
+  const themeIcon   = document.getElementById("theme-icon");
+  const themeText   = document.getElementById("theme-text");
+
+  if (!toggleTheme || !themeIcon || !themeText) return;
+
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+    themeIcon.src = "./assets/images/sun.png";
+    themeText.textContent = 'روشن';
   } else {
-    document.documentElement.classList.add("dark");
+    document.documentElement.classList.remove('dark');
+    themeIcon.src = "./assets/images/moon.png";
+    themeText.textContent = 'تاریک';
   }
+
+  toggleTheme.addEventListener("click", () => {
+    if (document.documentElement.classList.contains("dark")) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem('theme', 'light');
+      themeIcon.src = "./assets/images/moon.png";
+      themeText.textContent = 'تاریک';
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem('theme', 'dark');
+      themeIcon.src = "./assets/images/sun.png";
+      themeText.textContent = 'روشن';
+    }
+  });
 });
+
 
 //////////Display the form and create a new task based on the selected priority
 

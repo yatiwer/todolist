@@ -4,17 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
   <title>کوئرا لیست</title>
   <link rel="stylesheet" href="src/output.css" />
 </head>
-<body>
+<body class="bg-white dark:bg-gray-900">
 
   <div class="app-container">
 
     <!-- Sidebar -->
-      <aside class="hidden fixed bg-white w-[60%] z-[1002] md:block md:fixed md:top-4 md:right-6 md:border-gray-800 md:shadow-md md:rounded-md md:p-5 md:w-1/6 h-full" id="navMenu">  
+      <aside class="hidden fixed bg-white dark:bg-gray-800 w-[60%] z-[1002] md:block md:fixed md:top-4 md:right-6 md:border-gray-800 md:shadow-md md:rounded-md md:p-5 md:w-1/6 h-full" id="navMenu">  
         <div class="user-info hidden md:block">
            <div class="user-avatar">
           <img src="./assets/images/royaPic.png" alt="User Avatar"/>
@@ -30,7 +28,7 @@
         </div>
         <nav class="sidebar-nav flex flex-col gap-24 pt-6">
           <ul class="">
-            <li class="flex flex-row gap-3 p-4 rounded-xl" style="background-color: #F5FAFF;"><img src="./assets/images/home-2.png" alt="home" class="w-4 h-4 my-auto"><a class="font-bold" style="color: #007BFF  " href="#" class="active">خانه</a></li>
+            <li class="flex flex-row gap-3 p-4 rounded-xl dark:bg-blue-900" style="background-color: #F5FAFF;"><img src="./assets/images/home-2.png" alt="home" class="w-4 h-4 my-auto"><a class="font-bold" style="color: #007BFF  " href="#" class="active">خانه</a></li>
             <li class="flex flex-row gap-3 p-4"><img src="./assets/images/task-square.png" alt="task-square" class="w-4 h-4 my-auto"><a style="color: #525252;" href="#">تسک‌ها</a></li>
             <li class="flex flex-row gap-3 p-4"><img src="./assets/images/calendar.png" alt="calendar" class="w-4 h-4 my-auto"><a style="color: #525252;" href="#">تقویم</a></li>
             <li class="flex flex-row gap-3 p-4"><img src="./assets/images/arrange-square-2.png" alt="arrange-square" class="w-4 h-4 my-auto"><a style="color: #525252;" href="#">گزارشات</a></li>
@@ -39,12 +37,12 @@
             <li class="flex flex-row gap-3 p-4"><img src="./assets/images/profile.png" alt="profile" class="w-4 h-4 my-auto"><a style="color: #525252;" href="#">پروفایل</a></li>
             <li class="flex flex-row gap-3 p-4">
               <div class="sidebar-footer flex flex-col absolute bottom-15">
-                <div class="theme-toggle flex  bg-gray-100 p-4 gap-12 rounded-2xl min-w-14">
+                <div class="theme-toggle flex bg-gray-100 p-4 gap-12 rounded-2xl min-w-14">
                   <button id="toggle-theme" class="flex gap-2">
-                    <img class="w-4 h-4 my-auto" src="./assets/images/sun.png" alt="light_mode">روشن</button> 
-                  <button id="toggle-theme" class="flex gap-2 pl-0">
-                    <img class="w-4 h-4 my-auto" src="./assets/images/moon.png" alt="dark_mode">تاریک</button>  
-                </div> 
+                  <img id="theme-icon" class="w-4 h-4 my-auto" src="./assets/images/moon.png" alt="theme-icon">
+                  <span id="theme-text">تاریک</span>
+                  </button>
+                </div>
                 <hr class="text-gray-200 pt-2 mt-3">
                 <button class="logout-btn flex gap-4">
                   <img class="w-4 h-4 my-auto" src="./assets/images/logout.png" alt="logout">خروج</button>
@@ -60,12 +58,12 @@
     <main id="mainContent" class="main-content w-full md:w-4/5 absolute left-0 mx-auto">
       <!-- Header -->
       <header class="header  mx-auto p-4  text-right max-w-md md:hidden border-gray-300">
-        <nav class="flex items-center gap-2 rounded-lg p-3 bg-white shadow-md">
+        <nav class="flex items-center gap-2 rounded-lg p-3 bg-white dark:bg-gray-800 shadow-md">
           <div class="logo-menu flex items-center">
             <img src="./assets/images/BergurMenu.png" alt="" id="BergurMenu">
           </div>
           <div class="title flex items-center justify-center mb-4 w-full">
-            <h1 class="text-xl font-semibold text-gray-800">کوئرا لیست</h1>
+            <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100">کوئرا لیست</h1>
           </div>
         </nav>
       </header>
@@ -80,33 +78,33 @@
 
           <div class="user-info">
             <h1 class="font-semibold">سلام، رویا</h1>
-            <p id="today_mobile" class="text-gray-500"></p>
+            <p id="today_mobile" class="text-gray-500 dark:text-gray-400"></p>
           </div>
 
         </div>
       </div>
 
         <div class="section-header p-3 md:mt-10 ">
-          <h2 class="text-xl font-bold text-gray-800 mb-1">تسک‌های امروز</h2>
-          <p id="remaining-count" class="text-sm text-gray-500 mb-4"></p>
-          <p id="no-task" class="text-2sm text-gray-500 mb-4 hidden">تسکی برای امروز نداری !</p>
-          <div class="flex gap-2 border-2 border-dashed border-gray-300 rounded-xl p-3">
+          <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-1">تسک‌های امروز</h2>
+          <p id="remaining-count" class="text-sm text-gray-500 ark:text-gray-400 mb-4"></p>
+          <p id="no-task" class="text-2sm text-gray-500 dark:text-gray-400 mb-4 hidden">تسکی برای امروز نداری !</p>
+          <div class="flex gap-2 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-3">
             <img src="./assets/images/add.png" alt="add task">
-            <button class="add-task-btn text-blue-600 hover:cursor-pointer font-semibold">افزودن وظیفه جدید</button>
+            <button class="add-task-btn text-blue-600 dark:text-blue-400 hover:cursor-pointer font-semibold">افزودن وظیفه جدید</button>
           </div>
          
           <!--Create new task-->
-          <form class="task-From container mx-auto p-4 shadow rounded-lg  relative hidden mt-6 mb-2  " action="">
+          <form class="task-From container mx-auto p-4 shadow rounded-lg  relative hidden mt-6 mb-2 bg-white dark:bg-gray-800  " action="">
             <div class="flex flex-col gap-4">
-              <input class="outline-none text-[17px]  placeholder-gray-500" type="text" id="title" placeholder="نام تسک">
-              <input class="outline-none text-[15px]  placeholder-gray-400" type="text" id="description" placeholder="توضیحات">
+              <input class="outline-none text-[17px]  placeholder-gray-500 dark:placeholder-gray-400" type="text" id="title" placeholder="نام تسک">
+              <input class="outline-none text-[15px]  placeholder-gray-400 dark:placeholder-gray-500" type="text" id="description" placeholder="توضیحات">
             </div>
 
-            <div class="add-tag-btn flex gap-2 p-1 border-solid border-2 border-gray-200 max-w-20 rounded-[5px] hover:cursor-pointer mt-4">
+            <div class="add-tag-btn flex gap-2 p-1 border-solid border-2 border-gray-200 dark:border-gray-600 max-w-20 rounded-[5px] hover:cursor-pointer mt-4">
               <img src="./assets/images/tag-right.png" alt="icon" class="w-3">
-              <p class="text-slate-400 text-sx font-semibold ">تگ ها</p>
+              <p class="text-slate-400 text-sx font-semibold dark:text-slate-300 ">تگ ها</p>
             </div>
-            <div class="tag-Form hidden  text-sm my-5 bg-white border border-gray-200 shadow-2xl rounded-xl max-w-2xs">
+            <div class="tag-Form hidden  text-sm my-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 shadow-2xl rounded-xl max-w-2xs">
               <div id="priority-options" class="flex items-center justify-around">
                 <button type="button" class="priority-btn low px-3 py-0.5 hover:cursor-pointer rounded-md text-emerald-600 bg-emerald-200 m-2   ">پایین</button>
                 <div class="w-px h-5 bg-gray-200 mx-1"></div>
@@ -120,69 +118,71 @@
                 <span id="priority-label"></span> 
               </div>
             </div>
-            <hr class=" my-6 border-t border-gray-200  ">
+            <hr class=" my-6 border-t border-gray-200 dark:border-gray-700 ">
             <div class=" flex my-8 mr-44 mt-5 md:mr-[45rem] md:mt-10  gap-2 mb-0">
-              <img src="./assets/images/close-circle.png" alt="icon" class="hover:cursor-pointer   bg-gray-100 p-3 rounded-lg w-10" id="closeButton">
-              <button type="submit" disabled class="submit-task-btn text-sm p-2 text-white border bg-blue-400 rounded-lg hover:cursor-pointer w-5xl font-semibold " id="submitButton">اضافه کردن تسک</button>
+              <img src="./assets/images/close-circle.png" alt="icon" class="hover:cursor-pointer bg-gray-100 dark:bg-gray-700 p-3 rounded-lg w-10" id="closeButton">
+              <button type="submit" disabled class="submit-task-btn text-sm p-2 text-white border bg-blue-400 dark:bg-blue-600 rounded-lg hover:cursor-pointer w-5xl font-semibold " id="submitButton">اضافه کردن تسک</button>
             </div>
           </form> 
 
         </div>
 
         <ul class="todays-tasks space-y-3 gap-1 md:space-y-4 p-3 " id="list-container" >
-          <li class="relative bg-white shadow rounded-xl p-3 pr-4 md:h-28  ">
-            <div class="absolute top-0 bottom-0 right-0 w-1 bg-red-400 rounded-r-full"></div>
+          <li class="relative bg-white dark:bg-gray-800 dark:text-gray-200 shadow rounded-xl p-3 pr-4 md:h-28  ">
+            <div class="absolute top-0 bottom-0 right-0 w-1 bg-red-400 dark:bg-red-700 rounded-r-full"></div>
             <div class="flex justify-between">
               <div class=" flex items-center gap-3 mb-2">
                 <input type="checkbox" class="w-3 h-3 text-blue-500 form-checkbox" />
                 <span class="task-title text-sm">جلسه با مدیران پروژه</span>
-                <span class="hidden md:inline-block text-xs px-3 py-0.5 rounded-md bg-red-100 text-red-600 mr-4   ">بالا</span>
+                <span class="hidden md:inline-block text-xs px-3 py-0.5 rounded-md bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300 mr-4   ">بالا</span>
               </div>
-              <svg xmlns="http://www.w3.org/2000/svg" class="edit-delete-trigger cursor-pointer w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor" id="EditDeleteMenu">
+              <svg xmlns="http://www.w3.org/2000/svg" class="edit-delete-trigger cursor-pointer w-4 h-4 dark:bg-red-900 text-gray-400 dark:text-gray-300" viewBox="0 0 24 24" fill="currentColor" id="EditDeleteMenu">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor" id="EditDeleteMenu">
               <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" clip-rule="evenodd" />
             </div>
-             <span class="inline-block text-xs px-3 py-0.5 rounded-md bg-red-100 text-red-600 mr-4 md:hidden  ">بالا</span>
+             <span class="inline-block text-xs px-3 py-0.5 rounded-md bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300 mr-4 md:hidden  ">بالا</span>
              <p class="task-desc text-sm text-gray-500 mb-4 p-4 ">جلسه با محسن یگانه و مریم جلالی</p>     
           </li>
           
-          <li class="relative bg-white shadow rounded-xl p-3 pr-4 md:h-28 ">
-            <div class="absolute top-0 bottom-0 right-0 w-1  bg-amber-400 rounded-r-full"></div>
+          <li class="relative bg-white dark:bg-gray-800 shadow rounded-xl p-3 pr-4 md:h-28 ">
+            <div class="absolute top-0 bottom-0 right-0 w-1  bg-amber-400 dark:bg-amber-700 rounded-r-full"></div>
             <div class="flex justify-between">
               <div class=" flex items-center gap-3 mb-2">
                 <input type="checkbox" class="w-3 h-3 text-blue-500 form-checkbox" />
                 <span class="task-title text-sm">خرید میوه و سبزیجات برای خانه</span>
-                <span class="hidden text-xs px-3 py-0.5 rounded-md text-amber-600 bg-amber-200 mr-4 md:inline-block">متوسط</span>
+                <span class="hidden text-xs px-3 py-0.5 rounded-md text-amber-600 dark:text-amber-300 bg-amber-200 dark:bg-amber-700 mr-4 md:inline-block">متوسط</span>
               </div>
-              <svg xmlns="http://www.w3.org/2000/svg" class="edit-delete-trigger cursor-pointer w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="edit-delete-trigger cursor-pointer w-4 h-4 text-gray-400 dark:text-gray-300" viewBox="0 0 24 24" fill="currentColor">
                 <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" clip-rule="evenodd" />
             </div>
-            <span class="inline-block text-xs px-3 py-0.5 rounded-md text-amber-600 bg-amber-200 mr-4 md:hidden">متوسط</span>
-            <p class="task-desc text-sm text-gray-500 mb-4 p-4">سوپرمارکت یاران دریایی</p>
+            <span class="inline-block text-xs px-3 py-0.5 rounded-md text-amber-600 dark:text-amber-300 bg-amber-200 dark:bg-amber-700 mr-4 md:hidden">متوسط</span>
+            <p class="task-desc text-sm text-gray-500 dark:text-gray-400 mb-4 p-4">سوپرمارکت یاران دریایی</p>
           </li>
-          <li class="relative bg-white shadow rounded-xl p-3 pr-4 md:h-28">
+          <li class="relative bg-white dark:bg-gray-800 shadow rounded-xl p-3 pr-4 md:h-28">
             <div class="absolute top-0 bottom-0 right-0 w-1  bg-emerald-500 rounded-r-full"></div>
             <div class="flex justify-between mb-2">
               <div class=" flex items-center gap-3">
                 <input type="checkbox" class="w-3 h-3 text-blue-500 form-checkbox" />
                 <span class="text-sm">تماس با جمشید</span>
-                <span class="hidden text-xs px-3 py-0.5 rounded-md text-emerald-600 bg-emerald-200 mr-4 md:inline-block">پایین</span>
+                <span class="hidden text-xs px-3 py-0.5 rounded-md text-emerald-600 dark:text-emerald-300 bg-emerald-200 dark:bg-emerald-700 mr-4 md:inline-block">پایین</span>
               </div>
-              <svg xmlns="http://www.w3.org/2000/svg" class="edit-delete-trigger cursor-pointer w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="edit-delete-trigger cursor-pointer w-4 h-4 text-gray-400 dark:text-gray-300" viewBox="0 0 24 24" fill="currentColor">
                 <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" clip-rule="evenodd" />
             </div>
-            <span class="inline-block text-xs px-3 py-0.5 rounded-md text-emerald-600 bg-emerald-200 mr-4 md:hidden">پایین</span>
-            <p class="task-desc text-sm text-gray-500 mb-4 p-4">باید در مورد کارهای باقیمانده از پروژه قبلی صحبت کنیم</p>
+            <span class="inline-block text-xs px-3 py-0.5 rounded-md text-emerald-600 dark:text-emerald-300 bg-emerald-200 dark:bg-emerald-700 mr-4 md:hidden">پایین</span>
+            <p class="task-desc text-sm text-gray-500 dark:text-gray-400 mb-4 p-4">باید در مورد کارهای باقیمانده از پروژه قبلی صحبت کنیم</p>
           </li>
         </ul>
       </section>
 
       <!-- Completed Tasks -->
-      <section class="container mx-auto bg-white p-4  text-right max-w-md  md:max-w-[1000px] md:ml-46">
-        <h2 class="text-xl font-bold text-gray-800 mb-1">تسک‌های انجام شده</h2>
-        <p class="text-sm text-gray-500 mb-4"></p>
+      <section class="container mx-auto bg-white dark:bg-gray-800 p-4  text-right max-w-md  md:max-w-[1000px] md:ml-46">
+        <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-1">تسک‌های انجام شده</h2>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4"></p>
     
-        <ul class="completed-tasks w-full space-y-3 md:space-y-4"><li></li></ul>
+        <ul class="completed-tasks w-full space-y-3 md:space-y-4">
+          <li class="bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200 shadow rounded-xl p-3"></li>
+        </ul>
       </section>
     </main>
   </div>
