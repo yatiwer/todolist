@@ -3,8 +3,8 @@ const menuButton = document.getElementById("BergurMenu");
 const sidebar = document.getElementById("navMenu");
 const overlay = document.getElementById('overlay');
 const closeMenu = document.getElementById("closeMenu");
-//const mainContent = document.getElementById("mainContent");
-const mainContent = document.querySelector(".main-content");
+const mainContent = document.getElementById("mainContent");
+//const mainContent = document.querySelector(".main-content");
 
 menuButton.addEventListener('click', () => {
   sidebar.style.right=0;
