@@ -219,6 +219,7 @@ class taskManager {
 
       this.listContainer.appendChild(li);
     });
+    
     if (this.tasks.length === 0) {
       document.getElementById("remaining-count").classList.add("hidden");
       document.getElementById("no-task").classList.remove("hidden");
@@ -250,7 +251,6 @@ class taskManager {
     checkbox.type = 'checkbox';
     checkbox.checked = true;
     li.appendChild(checkbox);
-    li.appendChild(document.createTextNode(task.text));
     completedList.appendChild(li);
     });
 
@@ -262,7 +262,7 @@ class taskManager {
 
             
     tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    let taskObj = tasks.find(t => t.text === taskText);
+    let taskObj = tasks.find(t => t.title === taskTitle);
     if (!taskObj) {
     taskObj = { text: taskText, isCompleted: true, completedAt: Date.now() };
     tasks.push(taskObj);
@@ -285,11 +285,14 @@ class taskManager {
     completedList.addEventListener('change', function(e) {
     if (e.target.matches('input[type="checkbox"]') && !e.target.checked) {
     const listItem = e.target.closest('li');
+     completedList.appendChild(taskItem);
+  const ts = taskItem.querySelector('.task-title');
+  if (ts) ts.style.display = 'none';
     const taskText = listItem.textContent.trim();
 
             
     tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks = tasks.filter(t => t.text !== taskText);
+    tasks = tasks.filter(t => t.title !== taskTitle);
     localStorage.setItem('tasks', JSON.stringify(tasks));
 
             
@@ -545,15 +548,19 @@ document.addEventListener("change", function(e) {
     const completedList = document.querySelector(".completed-tasks");
 
     if (e.target.checked) {
-      // تیک خورد → تکسک انجام شده
+      
       completedList.appendChild(taskItem);
       titleSpan.classList.add("line-through");
-      
+       const descP = taskItem.querySelector('.task-desc');
+       if (descP) descP.classList.add('line-through');
 
     } else {
-      // تیک برداشته شد → برمی‌گرده تو تسک‌های امروز
+      
       todaysList.appendChild(taskItem);
       titleSpan.classList.remove("line-through");
+      titleSpan.classList.remove("line-through");
+      const descP = taskItem.querySelector('.task-desc');
+      if (descP) descP.classList.remove('line-through');
     }
 
     countRemainingTasks();
