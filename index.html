@@ -17,7 +17,7 @@
            <div class="user-avatar">
           <img class="w-16 h-16 rounded-4xl border-gray-800 shadow-xl" src="./assets/images/royaPic.png" alt="User Avatar"/>
         </div>
-          <h1 class="font-semibold mt-3">سلام، پیکسل پلاس</h1>
+          <h1 class="font-semibold mt-3 dark:text-white">سلام، پیکسل پلاس</h1>
           <p id="today" class="text-gray-500"></p>
         </div>
         <div class="block md:hidden">
@@ -27,17 +27,17 @@
           </div>
         </div>
         <nav class="sidebar-nav flex flex-col gap-24 pt-6">
-          <ul class="">
+          <ul class="dark:text-white">
             <li class="flex flex-row gap-3 p-4 rounded-xl dark:bg-blue-900" style="background-color: #F5FAFF;"><img src="./assets/images/home-2.png" alt="home" class="w-4 h-4 my-auto"><a class="font-bold" style="color: #007BFF  " href="#" class="active">خانه</a></li>
-            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/task-square.png" alt="task-square" class="w-4 h-4 my-auto"><a style="color: #525252;" href="#">تسک‌ها</a></li>
-            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/calendar.png" alt="calendar" class="w-4 h-4 my-auto"><a style="color: #525252;" href="#">تقویم</a></li>
-            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/arrange-square-2.png" alt="arrange-square" class="w-4 h-4 my-auto"><a style="color: #525252;" href="#">گزارشات</a></li>
-            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/setting.png" alt="setting" class="w-4 h-4 my-auto"><a style="color: #525252;" href="#">تنظیمات</a></li>
-            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/24-support.png" alt="24-support" class="w-4 h-4 my-auto"><a style="color: #525252;" href="#">پشتیبانی</a></li>
-            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/profile.png" alt="profile" class="w-4 h-4 my-auto"><a style="color: #525252;" href="#">پروفایل</a></li>
+            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/task-square.png" alt="task-square" class="w-4 h-4 my-auto"><a class="dark:text-white" href="#">تسک‌ها</a></li>
+            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/calendar.png" alt="calendar" class="w-4 h-4 my-auto"><a class="dark:text-white" href="#">تقویم</a></li>
+            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/arrange-square-2.png" alt="arrange-square" class="w-4 h-4 my-auto"><a class="dark:text-white" href="#">گزارشات</a></li>
+            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/setting.png" alt="setting" class="w-4 h-4 my-auto"><a class="dark:text-white" href="#">تنظیمات</a></li>
+            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/24-support.png" alt="24-support" class="w-4 h-4 my-auto"><a class="dark:text-white" href="#">پشتیبانی</a></li>
+            <li class="flex flex-row gap-3 p-4"><img src="./assets/images/profile.png" alt="profile" class="w-4 h-4 my-auto"><a class="dark:text-white" href="#">پروفایل</a></li>
             <li class="flex flex-row gap-3 p-4">
               <div class="sidebar-footer flex flex-col absolute bottom-15">
-                <div class="theme-toggle flex bg-gray-100 p-4 gap-12 rounded-2xl min-w-14">
+                <div class="theme-toggle flex bg-gray-100 p-4 gap-12 rounded-2xl min-w-14 dark:bg-gray-600 dark:text-white">
                   <button id="toggle-theme" class="flex gap-2">
                   <img id="theme-icon" class="w-4 h-4 my-auto" src="./assets/images/moon.png" alt="theme-icon">
                   <span id="theme-text">تاریک</span>
@@ -96,13 +96,13 @@
           <!--Create new task-->
           <form class="task-From container mx-auto p-4 shadow rounded-lg  relative hidden mt-6 mb-2 bg-white dark:bg-gray-800  " action="">
             <div class="flex flex-col gap-4">
-              <input class="outline-none text-[17px]  placeholder-gray-500 dark:placeholder-gray-400" type="text" id="title" placeholder="نام تسک">
-              <input class="outline-none text-[14.8px]  placeholder-gray-400 dark:placeholder-gray-500" type="text" id="description" placeholder="توضیحات">
+              <input class="outline-none text-[17px]  placeholder-gray-500 dark:placeholder-white" type="text" id="title" placeholder="نام تسک">
+              <input class="outline-none text-[14.8px]  placeholder-gray-400 dark:placeholder-white" type="text" id="description" placeholder="توضیحات">
             </div>
 
             <div class="add-tag-btn flex gap-2 p-1 border-solid border-2 border-gray-200 dark:border-gray-600 max-w-20 rounded-[5px] hover:cursor-pointer mt-4">
               <img src="./assets/images/tag-right.png" alt="icon" class="w-3">
-              <p class="text-slate-400 text-sx font-semibold dark:text-slate-300 ">تگ ها</p>
+              <p class="text-slate-400 text-sx font-semibold dark:text-white ">تگ ها</p>
             </div>
             <div class="tag-Form hidden  text-sm my-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 shadow-2xl rounded-xl max-w-2xs">
               <div id="priority-options" class="flex items-center justify-around">
