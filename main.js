@@ -243,15 +243,20 @@ class taskManager {
        </div>
        <span class="inline-block md:hidden text-xs px-3 py-0.5 rounded-md ${tagColor} mr-4">${tagText}</span>
        <p class="task-desc text-sm text-gray-500 dark:text-white mb-4 p-4">${item.description}</p>
+       `;
       
-     
-      
-    `;
-    
+       const checkbox = li.querySelector("input[type='checkbox']");
+      const titleSpan = li.querySelector(".task-title");
+      const descP = li.querySelector(".task-desc");
 
-
-     this.listContainer.appendChild(li);
-     
+      if (item.isCompleted) {
+        checkbox.checked = true; 
+        titleSpan.classList.add("line-through"); 
+        if (descP) descP.classList.add("line-through"); 
+        completedContainer.appendChild(li); 
+      } else {
+        this.listContainer.appendChild(li);
+      }     
     });
     
     
