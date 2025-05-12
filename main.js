@@ -224,11 +224,11 @@ class taskManager {
       }
       const li = document.createElement("li");
       li.dataset.id = item.id;
-      li.className = "relative bg-white shadow rounded-xl p-3 pr-4 md:h-28  ";
+      li.className = "relative bg-white shadow rounded-xl p-3 pr-4 md:h-28 dark:bg-slate-500 ";
       li.innerHTML = `
        <div class="absolute top-4 bottom-4 right-0 w-1 ${priorityColor} rounded-l-full"></div>
        <div class="flex justify-between items-start">
-        <div class="flex items-center gap-3 mb-2">
+        <div class="flex items-center gap-3 mb-2 dark:text-white">
          <input type="checkbox" class="w-3 h-3 text-blue-500 form-checkbox" />
          <span class="task-title text-sm">${item.title}</span>
          <span class="hidden md:inline-block text-xs px-3 py-0.5 rounded-md ${tagColor} mr-4">${tagText}</span>
@@ -236,13 +236,13 @@ class taskManager {
 
     
         <svg xmlns="http://www.w3.org/2000/svg"
-          class="w-5 h-5 text-gray-400 edit-delete-trigger cursor-pointer"
+          class="w-5 h-5 text-gray-400 edit-delete-trigger cursor-pointer dark:text-white"
           viewBox="0 0 20 20" fill="currentColor">
          <path d="M10 6a2 2 0 110-4 2 2 0 010 4zm0 6a2 2 0 110-4 2 2 0 010 4zm0 6a2 2 0 110-4 2 2 0 010 4z" />
         </svg>
        </div>
        <span class="inline-block md:hidden text-xs px-3 py-0.5 rounded-md ${tagColor} mr-4">${tagText}</span>
-       <p class="task-desc text-sm text-gray-500 mb-4 p-4">${item.description}</p>
+       <p class="task-desc text-sm text-gray-500 dark:text-white mb-4 p-4">${item.description}</p>
       
      
       
