@@ -301,10 +301,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   
   countEl.classList.add(
+    "relative",
     "text-sm",
     "text-gray-500",
     "mt-2",
-    "font-medium"
+    "font-medium",
+    "right-3"
   );
 
   
@@ -512,6 +514,12 @@ document.addEventListener("change", function (e) {
 document.addEventListener("change", function(e) {
   if (e.target.classList.contains("form-checkbox")) {
     const taskItem      = e.target.closest("li");
+     const taskId = parseFloat(taskItem.dataset.id);
+    const taskObj = taskmanager.tasks.find(t => t.id === taskId);
+    if (taskObj) {
+      taskObj.isCompleted = e.target.checked;
+      taskmanager.saveTasksToStorage();
+    }
     const titleSpan     = taskItem.querySelector(".task-title");
     const todaysList    = document.querySelector(".todays-tasks");
     const completedList = document.querySelector(".completed-tasks");
@@ -566,6 +574,35 @@ document.querySelector("#list-container").addEventListener("click", (e) => {
 
       taskmanager.AddEventListeners();
 
+    }
+    e.stopPropagation();
+  }
+});
+document.querySelector(".completed-tasks").addEventListener("click", (e) => {
+  if (e.target.closest(".edit-delete-trigger")) {
+    const taskItem = e.target.closest("li");
+    const existingMenu = taskItem.querySelector(".edit-delete-menu");
+    if (existingMenu) {
+      existingMenu.remove();
+    } else {
+      const menu = document.createElement("div");
+      menu.className = "edit-delete-menu absolute top-0 right-full mr-2 bg-white shadow rounded p-2 flex flex-col gap-2";
+      menu.innerHTML =`
+        <button class="edit-btn flex items-center gap-1 hover:text-blue-600 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.5-9.5z" />
+          </svg>
+        </button>
+        <button class="delete-btn flex items-center gap-1 hover:text-red-600 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      `;
+      taskItem.append(menu);
+      taskmanager.AddEventListeners();
     }
     e.stopPropagation();
   }
