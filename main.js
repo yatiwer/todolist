@@ -379,8 +379,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   });
  }
-//  
-// --------------------------------------------
+
 AddEventListeners() {
   document.querySelectorAll(".edit-btn").forEach((button) => {
     button.addEventListener("click", (e) => {
@@ -421,37 +420,7 @@ RemoveTask(e) {
   this.tasks = this.tasks.filter((item) => item.id != taskid);
   localStorage.setItem("tasks", JSON.stringify(this.tasks));
   this.renderTask();
-}
-// ------------------------------------------------------------
-
-
-
-  // z.Kiani:get id when click on the button and then remove  it
-  // AddEventListeners() {
-  //   document.querySelectorAll(".edit-btn").forEach((button) => {
-  //     button.addEventListener("click", (e) => {
-  //       this.EditTask(e);
-  //     });
-  //   });
-
-  // //  document.querySelectorAll(".delete-btn").forEach((button) => {
-  // //     button.addEventListener("click", (e) => {
-  // //       this.RemoveTask(e);
-  // //     }); 
-  // //   });
-  // }
-  // EditTask(e){
-  //     const taskid = e.target.closest("li").dataset.id;
-  //     console.log(`Edit id ${taskid}`)
-  // }
-  //z.Kiani:remove  task
-  // RemoveTask(e) {
-  //   const taskid = e.target.closest("li").dataset.id;
-  //   this.tasks = this.tasks.filter((item) => item.id != taskid);
-  //   localStorage.setItem("tasks", JSON.stringify(this.tasks));
-  //   this.renderTask();
-  // }
-}
+}}
   
   
 const taskmanager = new taskManager();
@@ -481,14 +450,11 @@ form.addEventListener("submit", (e) => {
 
 
 
-////////////////////
 
-// تاریخ امروز به فرمت شمسی
-// این کد تاریخ امروز را برای دسکتاپ به فرمت شمسی نمایش می‌دهد
 document.addEventListener("DOMContentLoaded", () => {
   const today = new Date();
 
-  // گرفتن اجزای تاریخ به‌صورت جداگانه
+  
   const weekday = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
     weekday: "long",
   }).format(today);
@@ -505,16 +471,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const formatted = `امروز ${weekday}، ${day} ${month} ${year}`;
   const dateElement = document.getElementById("today");
 
-  // متن نهایی
+  
   dateElement.textContent = formatted;
 });
 
-// تاریخ امروز به فرمت شمسی برای نسخه موبایل
-// این کد تاریخ امروز را برای نسخه موبایل به فرمت شمسی نمایش می‌دهد
+
 document.addEventListener("DOMContentLoaded", () => {
   const today_mobile = new Date();
 
-  // گرفتن اجزای تاریخ به‌صورت جداگانه
+  
   const weekday = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
     weekday: "long",
   }).format(today_mobile);
@@ -531,13 +496,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const formatted = `امروز ${weekday}، ${day} ${month} ${year}`;
   const dateElement = document.getElementById("today_mobile");
 
-  // متن نهایی
+  
   dateElement.textContent = formatted;
 });
-// تاریخ امروز به فرمت شمسی
-// این کد تاریخ امروز را برای نسخه موبایل به فرمت شمسی نمایش می‌دهد
 
-// این تابع برای شمارش تعداد تسک‌های باقی‌مانده استفاده می‌شود
+
+
+
 function countRemainingTasks() {
   const allTasks = document.querySelectorAll(".form-checkbox");
   let remaining = 0;
@@ -548,7 +513,7 @@ function countRemainingTasks() {
     }
   });
 
-  // نمایش تعداد تسک باقی مانده
+  
   const persianNumber = remaining.toLocaleString("fa-IR");
 
   document.getElementById(
@@ -556,16 +521,16 @@ function countRemainingTasks() {
   ).textContent = ` ${persianNumber} تسک را باید انجام دهید`;
 }
 
-// برای اجرای اولیه
+
 document.addEventListener("DOMContentLoaded", countRemainingTasks);
 
-// برای هر بار تغییر وضعیت چک‌باکس
+
 document.addEventListener("change", function (e) {
   if (e.target.classList.contains("form-checkbox")) {
     countRemainingTasks();
   }
 });
-// این تابع برای شمارش تعداد تسک‌های باقی‌مانده استفاده می‌شود
+
 
 
 document.addEventListener("change", function(e) {
@@ -665,66 +630,8 @@ document.querySelector(".completed-tasks").addEventListener("click", (e) => {
   }
 });
 
-//کدهای اقای ارمان برای منو حذف و ویرایش
-/*
-document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
-  trigger.addEventListener('click', function(e) {
-    console.log(e);
-    console.log(e.target.closest("li").dataset.id);
-    e.stopPropagation();
-    const taskItem = e.target.closest("li").dataset.id;
-    //const taskItem = this.closest("li");
-
-     document.querySelectorAll(".delete-btn").forEach((button) => {
-       button.addEventListener("click", (e) => {
-         this.RemoveTask(e);
-       });
-     });
 
 
-   // const existingMenu = taskItem.querySelector(".edit-delete-");
-    if (existingMenu) {
-      existingMenu.remove();
-      return;
-       }  
-
-    const menu = document.createElement("div");
-
-    menu.className =
-      "edit-delete-menu absolute top-0 right-full mr-2 bg-white shadow rounded p-2 flex flex-col gap-2";
-    menu.innerHTML = `
-      <button class="edit-btn flex items-center gap-1 hover:text-blue-600 cursor-pointer edit-delete-trigger">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.5-9.5z" />
-        </svg>
-        
-      </button>
-      <button class="delete-btn flex items-center gap-1 hover:text-red-600 cursor-pointer edit-delete-trigger">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M6 18L18 6M6 6l12 12" />
-        </svg>
-        
-      </button>
-    `;
-    taskItem.append(menu);
-
-    //z.kiani:for calling Delete button
-    taskmanager.AddEventListeners();
-
-
-    document.addEventListener("click", function closeMenu(ev) {
-      if (!menu.contains(ev.target) && ev.target !==menu trigger) {
-        menu.remove();
-        document.removeEventListener("click", closeMenu);
-      }
-    });
-  });
-});
-*/
-
-// 1) Helpers to shrink / restore one task-item
 function shrinkCompletedItem(li) {
   if (li.dataset.shrunk) return;
   li.dataset.shrunk = 'true';
@@ -740,11 +647,11 @@ function restoreItem(li) {
   li.classList.add("p-3", "md:h-28", "mb-4");
 }
 
-// 2) Initial pass on page-load
+
 document.querySelectorAll(".completed-tasks li").forEach(shrinkCompletedItem);
 document.querySelectorAll(".todays-tasks li").forEach(restoreItem);
 
-// 3) Observe moves in/out of completed-tasks
+
 const completedList = document.querySelector(".completed-tasks");
 const obs = new MutationObserver(mutations => {
   mutations.forEach(m => {
