@@ -70,41 +70,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-
-//////////Display the form and create a new task based on the selected priority
-
-
-
+//Z.Bayat
+// Display the form and create a new task based on the user entered information
 const addTaskbutton = document.querySelector('.add-task-btn');
 const form = document.querySelector('.task-From');
-
-console.log(addTaskbutton);
-console.log(form);
-
-
 addTaskbutton.addEventListener("click", () => {
   if (form.classList.contains("hidden")) {
     form.classList.remove("hidden");
-
   }
-  
- })
-
-
-
+ });
 const addTagbutton = document.querySelector(".add-tag-btn");
 const priorityTag = document.querySelector(".tag-Form");
 addTagbutton.addEventListener("click", () => {
-  
+ 
   if (priorityTag.classList.contains("hidden")) {
     priorityTag.classList.remove("hidden");
-    priorityTag.style.display = "inline-block";
+    priorityTag.classList.add("inline-block");
   }
-
+  else {
+    priorityTag.classList.remove("inline-block");
+    priorityTag.classList.add("hidden");
+  }
 });
-
-
 let selectedPriority= 3;
 const priorityValue = document.querySelectorAll('.priority-btn');
 priorityValue.forEach(button =>{
@@ -129,7 +116,7 @@ priorityValue.forEach(btn => {
          Priority.classList.remove('hidden'); 
          priorityLabel.textContent = value; 
          Priority.classList.remove( 'bg-emerald-200', 'text-emerald-700', 'bg-amber-200', 'text-amber-600', 'bg-red-100', 'text-red-600' );
-         priorityTag.classList.remove( 'bg-white', 'border' ,'border-gray-200','shadow-2xl', 'rounded-md');
+         priorityTag.classList.remove('bg-white', 'border' ,'border-gray-200','shadow','shadow-2xl', 'rounded-md');
          if (value === 'پایین') { 
             Priority.classList.add('bg-emerald-200', 'text-emerald-700');
         } else if (value === 'متوسط') { 
@@ -162,6 +149,18 @@ inputTitle.addEventListener("input", () => {
 const closeButton = document.getElementById("closeButton"); 
 closeButton.addEventListener("click", () => { 
   form.classList.add("hidden"); 
+  inputTitle.value = ''; 
+  document.getElementById('description').value = ''; 
+  submitButton.disabled = true;
+  submitButton.classList.remove("bg-blue-600", "hover:cursor-pointer"); 
+  submitButton.classList.add("bg-blue-400", "hover:cursor-not-allowed");
+  priorityTag.classList.remove("inline-block");
+  priorityTag.classList.add("hidden");
+  priorityLabel.textContent = '';
+  Priority.classList.add('hidden');
+  priorityOptions.classList.remove('hidden');
+  priorityTag.classList.add('bg-white', 'border', 'border-gray-200', 'shadow'); 
+  Priority.classList.remove('bg-emerald-200', 'text-emerald-700', 'bg-amber-200','text-amber-600', 'bg-red-100', 'text-red-600'); 
 });
 
 class task {
