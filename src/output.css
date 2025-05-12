@@ -69,6 +69,7 @@
     --radius-lg: 0.5rem;
     --radius-xl: 0.75rem;
     --radius-2xl: 1rem;
+    --radius-4xl: 2rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --color-primary: #dbeafe;
@@ -241,6 +242,11 @@
   .right-3 {
     right: calc(var(--spacing) * 3);
   }
+
+  .right-4 {
+    right: calc(var(--spacing) * 4);
+  }
+
   .right-full {
     right: 100%;
   }
@@ -255,6 +261,9 @@
   }
   .left-0 {
     left: calc(var(--spacing) * 0);
+  }
+  .left-4 {
+    left: calc(var(--spacing) * 4);
   }
   .z-\[1000\] {
     z-index: 1000;
@@ -303,6 +312,9 @@
   }
   .my-auto {
     margin-block: auto;
+  }
+  .mt-1 {
+    margin-top: calc(var(--spacing) * 1);
   }
   .mt-2 {
     margin-top: calc(var(--spacing) * 2);
@@ -379,6 +391,18 @@
   .h-5 {
     height: calc(var(--spacing) * 5);
   }
+  .h-8 {
+    height: calc(var(--spacing) * 8);
+  }
+  .h-10 {
+    height: calc(var(--spacing) * 10);
+  }
+  .h-14 {
+    height: calc(var(--spacing) * 14);
+  }
+  .h-16 {
+    height: calc(var(--spacing) * 16);
+  }
   .h-40 {
     height: calc(var(--spacing) * 40);
   }
@@ -394,6 +418,9 @@
   .w-3 {
     width: calc(var(--spacing) * 3);
   }
+  .w-3\/4 {
+    width: calc(3/4 * 100%);
+  }
   .w-4 {
     width: calc(var(--spacing) * 4);
   }
@@ -406,8 +433,17 @@
   .w-6 {
     width: calc(var(--spacing) * 6);
   }
+  .w-8 {
+    width: calc(var(--spacing) * 8);
+  }
   .w-10 {
     width: calc(var(--spacing) * 10);
+  }
+  .w-14 {
+    width: calc(var(--spacing) * 14);
+  }
+  .w-16 {
+    width: calc(var(--spacing) * 16);
   }
   .w-52 {
     width: calc(var(--spacing) * 52);
@@ -500,6 +536,9 @@
   .rounded-2xl {
     border-radius: var(--radius-2xl);
   }
+  .rounded-4xl {
+    border-radius: var(--radius-4xl);
+  }
   .rounded-\[5px\] {
     border-radius: 5px;
   }
@@ -545,6 +584,9 @@
   }
   .border-gray-300 {
     border-color: var(--color-gray-300);
+  }
+  .border-gray-800 {
+    border-color: var(--color-gray-800);
   }
   .bg-amber-200 {
     background-color: var(--color-amber-200);
@@ -737,8 +779,16 @@
     --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
+  .shadow-2xs {
+    --tw-shadow: 0 1px var(--tw-shadow-color, rgb(0 0 0 / 0.05));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
   .shadow-md {
     --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-xl {
+    --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .outline {

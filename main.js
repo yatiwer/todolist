@@ -70,41 +70,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-
-//////////Display the form and create a new task based on the selected priority
-
-
-
+//Z.Bayat
+// Display the form and create a new task based on the user entered information
 const addTaskbutton = document.querySelector('.add-task-btn');
 const form = document.querySelector('.task-From');
-
-console.log(addTaskbutton);
-console.log(form);
-
-
 addTaskbutton.addEventListener("click", () => {
   if (form.classList.contains("hidden")) {
     form.classList.remove("hidden");
-
   }
-  
- })
-
-
-
+ });
 const addTagbutton = document.querySelector(".add-tag-btn");
 const priorityTag = document.querySelector(".tag-Form");
 addTagbutton.addEventListener("click", () => {
-  
+ 
   if (priorityTag.classList.contains("hidden")) {
     priorityTag.classList.remove("hidden");
-    priorityTag.style.display = "inline-block";
+    priorityTag.classList.add("inline-block");
   }
-
+  else {
+    priorityTag.classList.remove("inline-block");
+    priorityTag.classList.add("hidden");
+  }
 });
-
-
 let selectedPriority= 3;
 const priorityValue = document.querySelectorAll('.priority-btn');
 priorityValue.forEach(button =>{
@@ -129,7 +116,7 @@ priorityValue.forEach(btn => {
          Priority.classList.remove('hidden'); 
          priorityLabel.textContent = value; 
          Priority.classList.remove( 'bg-emerald-200', 'text-emerald-700', 'bg-amber-200', 'text-amber-600', 'bg-red-100', 'text-red-600' );
-         priorityTag.classList.remove( 'bg-white', 'border' ,'border-gray-200','shadow-2xl', 'rounded-md');
+         priorityTag.classList.remove('bg-white', 'border' ,'border-gray-200','shadow','shadow-2xl', 'rounded-md');
          if (value === 'پایین') { 
             Priority.classList.add('bg-emerald-200', 'text-emerald-700');
         } else if (value === 'متوسط') { 
@@ -162,6 +149,18 @@ inputTitle.addEventListener("input", () => {
 const closeButton = document.getElementById("closeButton"); 
 closeButton.addEventListener("click", () => { 
   form.classList.add("hidden"); 
+  inputTitle.value = ''; 
+  document.getElementById('description').value = ''; 
+  submitButton.disabled = true;
+  submitButton.classList.remove("bg-blue-600", "hover:cursor-pointer"); 
+  submitButton.classList.add("bg-blue-400", "hover:cursor-not-allowed");
+  priorityTag.classList.remove("inline-block");
+  priorityTag.classList.add("hidden");
+  priorityLabel.textContent = '';
+  Priority.classList.add('hidden');
+  priorityOptions.classList.remove('hidden');
+  priorityTag.classList.add('bg-white', 'border', 'border-gray-200', 'shadow'); 
+  Priority.classList.remove('bg-emerald-200', 'text-emerald-700', 'bg-amber-200','text-amber-600', 'bg-red-100', 'text-red-600'); 
 });
 
 class task {
@@ -585,12 +584,59 @@ document.addEventListener("change", function(e) {
   }
 });
 
+document.querySelector("#list-container").addEventListener("click", (e) => {
+  if (e.target.closest(".edit-delete-trigger")) {
+    const taskItem = e.target.closest("li");
+    const existingMenu = taskItem.querySelector(".edit-delete-menu");
+
+    if (existingMenu) {
+      existingMenu.remove();
+    } else {
+
+      const menu = document.createElement("div");
+      menu.className =
+        "edit-delete-menu absolute top-0 right-full mr-2 bg-white shadow rounded p-2 flex flex-col gap-2";
+      menu.innerHTML = `
+        <button class="edit-btn flex items-center gap-1 hover:text-blue-600 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.5-9.5z" />
+          </svg>
+        </button>
+        <button class="delete-btn flex items-center gap-1 hover:text-red-600 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      `;
+      taskItem.append(menu);
+
+      taskmanager.AddEventListeners();
+
+    }
+    e.stopPropagation();
+  }
+});
+
+//کدهای اقای ارمان برای منو حذف و ویرایش
+/*
 document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
   trigger.addEventListener('click', function(e) {
+    console.log(e);
+    console.log(e.target.closest("li").dataset.id);
     e.stopPropagation();
+    const taskItem = e.target.closest("li").dataset.id;
+    //const taskItem = this.closest("li");
 
-    const taskItem = this.closest("li");
-    const existingMenu = taskItem.querySelector(".edit-delete-menu");
+     document.querySelectorAll(".delete-btn").forEach((button) => {
+       button.addEventListener("click", (e) => {
+         this.RemoveTask(e);
+       });
+     });
+
+
+   // const existingMenu = taskItem.querySelector(".edit-delete-");
     if (existingMenu) {
       existingMenu.remove();
       return;
@@ -623,10 +669,11 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
 
 
     document.addEventListener("click", function closeMenu(ev) {
-      if (!menu.contains(ev.target) && ev.target !== trigger) {
+      if (!menu.contains(ev.target) && ev.target !==menu trigger) {
         menu.remove();
         document.removeEventListener("click", closeMenu);
       }
     });
   });
 });
+*/
