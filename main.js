@@ -248,15 +248,19 @@ class taskManager {
        const checkbox = li.querySelector("input[type='checkbox']");
       const titleSpan = li.querySelector(".task-title");
       const descP = li.querySelector(".task-desc");
-
       if (item.isCompleted) {
-        checkbox.checked = true; 
-        titleSpan.classList.add("line-through"); 
-        if (descP) descP.classList.add("line-through"); 
-        completedContainer.appendChild(li); 
-      } else {
-        this.listContainer.appendChild(li);
-      }     
+      checkbox.checked = true; 
+      titleSpan.classList.add("line-through"); 
+      if (descP) descP.classList.add("line-through"); 
+      completedContainer.appendChild(li); 
+
+      const bar = li.querySelector('div.absolute.right-0');
+      if (bar) {
+        bar.classList.remove('top-4', 'bottom-4');    
+        bar.classList.add('top-1', 'bottom-1', 'right-[1px]');        
+      }} else {
+      this.listContainer.appendChild(li);
+      }
     });
     
     
@@ -719,3 +723,44 @@ document.querySelectorAll('.edit-delete-trigger').forEach(trigger => {
   });
 });
 */
+
+// 1) Helpers to shrink / restore one task-item
+function shrinkCompletedItem(li) {
+  if (li.dataset.shrunk) return;
+  li.dataset.shrunk = 'true';
+
+  li.classList.remove("p-3", "md:h-28", "mb-4");
+  li.classList.add("py-1", "px-3", "text-sm", "leading-tight", "mb-1", "max-h-[60px]");
+}
+function restoreItem(li) {
+  if (!li.dataset.shrunk) return;
+  delete li.dataset.shrunk;
+
+  li.classList.remove("py-1", "px-3", "text-sm", "leading-tight", "mb-1", "max-h-[60px]" );
+  li.classList.add("p-3", "md:h-28", "mb-4");
+}
+
+// 2) Initial pass on page-load
+document.querySelectorAll(".completed-tasks li").forEach(shrinkCompletedItem);
+document.querySelectorAll(".todays-tasks li").forEach(restoreItem);
+
+// 3) Observe moves in/out of completed-tasks
+const completedList = document.querySelector(".completed-tasks");
+const obs = new MutationObserver(mutations => {
+  mutations.forEach(m => {
+    // any new <li> added → shrink it
+    m.addedNodes.forEach(node => {
+      if (node.nodeType === 1 && node.matches("li")) {
+        shrinkCompletedItem(node);
+      }
+    });
+    // any <li> removed → restore it
+    m.removedNodes.forEach(node => {
+      if (node.nodeType === 1 && node.matches("li")) {
+        restoreItem(node);
+      }
+    });
+  });
+});
+obs.observe(completedList, { childList: true });
+
