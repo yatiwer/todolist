@@ -242,9 +242,11 @@
   .right-3 {
     right: calc(var(--spacing) * 3);
   }
+
   .right-4 {
     right: calc(var(--spacing) * 4);
   }
+
   .right-full {
     right: 100%;
   }

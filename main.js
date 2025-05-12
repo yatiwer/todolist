@@ -201,10 +201,11 @@ class taskManager {
   sortTask() {
     this.tasks.sort((a, b) => a.priority - b.priority);
   }
+  
   renderTask() {
     this.sortTask();
     this.listContainer.innerHTML = "";
-     const completedContainer = document.querySelector(".completed-tasks"); 
+    const completedContainer = document.querySelector(".completed-tasks"); 
     completedContainer.innerHTML = "";
 
     this.tasks.forEach((item) => {
@@ -225,37 +226,34 @@ class taskManager {
       li.dataset.id = item.id;
       li.className = "relative bg-white shadow rounded-xl p-3 pr-4 md:h-28  ";
       li.innerHTML = `
-      <div class="absolute top-4 bottom-4 right-0 w-1 ${priorityColor} rounded-l-full"></div>
-      <div class="flex justify-between items-start">
+       <div class="absolute top-4 bottom-4 right-0 w-1 ${priorityColor} rounded-l-full"></div>
+       <div class="flex justify-between items-start">
         <div class="flex items-center gap-3 mb-2">
-          <input type="checkbox" class="w-3 h-3 text-blue-500 form-checkbox" />
-          <span class="task-title text-sm">${item.title}</span>
-          <span class="hidden md:inline-block text-xs px-3 py-0.5 rounded-md ${tagColor} mr-4">${tagText}</span>
+         <input type="checkbox" class="w-3 h-3 text-blue-500 form-checkbox" />
+         <span class="task-title text-sm">${item.title}</span>
+         <span class="hidden md:inline-block text-xs px-3 py-0.5 rounded-md ${tagColor} mr-4">${tagText}</span>
         </div>
-        
-        <svg xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 text-gray-400 edit-delete-trigger cursor-pointer"
-            viewBox="0 0 20 20" fill="currentColor">
-          <path d="M10 6a2 2 0 110-4 2 2 0 010 4zm0 6a2 2 0 110-4 2 2 0 010 4zm0 6a2 2 0 110-4 2 2 0 010 4z" />
-        </svg>
-      </div>
-      <span class="inline-block md:hidden text-xs px-3 py-0.5 rounded-md ${tagColor} mr-4">${tagText}</span>
-      <p class="task-desc text-sm text-gray-500 mb-4 p-4">${item.description}</p>
-    `;
-       const checkbox = li.querySelector("input[type='checkbox']"); 
-    const titleSpan = li.querySelector(".task-title"); 
-    const descP = li.querySelector(".task-desc"); 
 
-    if (item.isCompleted) { 
-      checkbox.checked = true; 
-      titleSpan.classList.add("line-through"); 
-      if (descP) descP.classList.add("line-through"); 
-      completedContainer.appendChild(li); 
-    } else { 
-      this.listContainer.appendChild(li); 
-    }
+    
+        <svg xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5 text-gray-400 edit-delete-trigger cursor-pointer"
+          viewBox="0 0 20 20" fill="currentColor">
+         <path d="M10 6a2 2 0 110-4 2 2 0 010 4zm0 6a2 2 0 110-4 2 2 0 010 4zm0 6a2 2 0 110-4 2 2 0 010 4z" />
+        </svg>
+       </div>
+       <span class="inline-block md:hidden text-xs px-3 py-0.5 rounded-md ${tagColor} mr-4">${tagText}</span>
+       <p class="task-desc text-sm text-gray-500 mb-4 p-4">${item.description}</p>
       
+     
+      
+    `;
+    
+
+
+     this.listContainer.appendChild(li);
+     
     });
+    
     
     if (this.tasks.length === 0) {
       document.getElementById("remaining-count").classList.add("hidden");
@@ -273,6 +271,8 @@ class taskManager {
       `;
       container.appendChild(div);
     }
+    
+    
    
 document.addEventListener("DOMContentLoaded", function() {
     var headings = document.querySelectorAll("h1, h2, h3, h4");
@@ -317,6 +317,7 @@ document.addEventListener("DOMContentLoaded", function() {
  
   countEl.textContent = toPersian(count) + " تسک انجام شده است";
 }
+
 
     function hideLabels(task) {
     var prioWords = ["بالا","متوسط","پایین"];
@@ -367,33 +368,80 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     observer.observe(completedList, { childList: true });
   }
-});
+  });
  }
-  //z.Kiani:get id when click on the button and then remove  it
-  AddEventListeners() {
-    document.querySelectorAll(".edit-btn").forEach((button) => {
-      button.addEventListener("click", (e) => {
-        this.EditTask(e);
-      });
+//  
+// --------------------------------------------
+AddEventListeners() {
+  document.querySelectorAll(".edit-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const taskId = e.target.closest("li").dataset.id;
+      this.EditTask(taskId); 
     });
+  });
+  document.querySelectorAll(".delete-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      this.RemoveTask(e);
+    }); 
+  });
+};
 
-    document.querySelectorAll(".delete-btn").forEach((button) => {
-      button.addEventListener("click", (e) => {
-        this.RemoveTask(e);
-      });
-    });
+EditTask(taskId) {
+  const taskToEdit = this.tasks.find(task => task.id == taskId);
+
+  const newTitle = prompt("Enter new task title", taskToEdit.title);
+  const newDesc = prompt("Enter new task description", taskToEdit.description);
+  let newPri = prompt("Enter new task priority (1 = High, 2 = Medium, 3 = Low)", taskToEdit.priority);
+  newPri = parseInt(newPri);
+  if (![1, 2, 3].includes(newPri)) {
+    alert("Invalid priority. Please enter 1, 2, or 3.");
+    return; 
   }
-  EditTask(e){
-      const taskid = e.target.closest("li").dataset.id;
-      console.log(`Edit id ${taskid}`)
+
+  if (newTitle !== null && newDesc !== null) {
+    taskToEdit.title = newTitle;
+    taskToEdit.description = newDesc;
+    taskToEdit.priority = newPri;
+
+    this.saveTasksToStorage();
+    this.renderTask(); 
   }
+};
+RemoveTask(e) {
+  const taskid = e.target.closest("li").dataset.id;
+  this.tasks = this.tasks.filter((item) => item.id != taskid);
+  localStorage.setItem("tasks", JSON.stringify(this.tasks));
+  this.renderTask();
+}
+// ------------------------------------------------------------
+
+
+
+  // z.Kiani:get id when click on the button and then remove  it
+  // AddEventListeners() {
+  //   document.querySelectorAll(".edit-btn").forEach((button) => {
+  //     button.addEventListener("click", (e) => {
+  //       this.EditTask(e);
+  //     });
+  //   });
+
+  // //  document.querySelectorAll(".delete-btn").forEach((button) => {
+  // //     button.addEventListener("click", (e) => {
+  // //       this.RemoveTask(e);
+  // //     }); 
+  // //   });
+  // }
+  // EditTask(e){
+  //     const taskid = e.target.closest("li").dataset.id;
+  //     console.log(`Edit id ${taskid}`)
+  // }
   //z.Kiani:remove  task
-  RemoveTask(e) {
-    const taskid = e.target.closest("li").dataset.id;
-    this.tasks = this.tasks.filter((item) => item.id != taskid);
-    localStorage.setItem("tasks", JSON.stringify(this.tasks));
-    this.renderTask();
-  }
+  // RemoveTask(e) {
+  //   const taskid = e.target.closest("li").dataset.id;
+  //   this.tasks = this.tasks.filter((item) => item.id != taskid);
+  //   localStorage.setItem("tasks", JSON.stringify(this.tasks));
+  //   this.renderTask();
+  // }
 }
   
   
